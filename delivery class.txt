@@ -1,0 +1,166 @@
+ 
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+<link rel="stylesheet" href="des.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<?PHP
+session_start();
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['username'];
+  $query = " SELECT *FROM `admintb` where username='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center w3-black" style="z-index:3;width:300px;">
+
+<a href="ds.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-user fa-fw w3-xxlarge"></i>
+        <p><b>Welcome &nbsp;&nbsp;<?php echo $product['name'];?></b></p></a><?php } ?>
+
+<a href="adminprofile.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users fa-fw w3-xxlarge"></i>
+    <p>Add Admin</p>
+  </a>
+  <!-- <p style="font-size: 15px; text-decoration: none;">Admin</p></a>  -->
+  <a href="add.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-plus fa-fw w3-xxlarge"></i>
+    <p>Add Items</p>
+  </a>
+  <a href="video/index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-video-camera fa-fw w3-xxlarge"></i>
+    <p>Upload videos </p>
+  </a>
+  <a href="register.php" class="w3-bar-item w3-button w3-padding-large  w3-black w3-hover-shadow">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>Customer Details</p>
+  </a>
+  <a href="reqorder.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-book fa-fw w3-xxlarge"></i>
+    <p>Orders</p>
+  </a>
+  <a href="report.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-folder fa-fw w3-xxlarge"></i>
+    <p>View Reports</p>
+  </a>
+  <a href="delivery.class.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-motorcycle w3-xxlarge"></i>
+    <p>Delivery</p>
+  </a>
+  <a href="stock.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-sticky-note w3-xxlarge"></i>
+    <p>Stock</p>
+  </a>
+  <a href="feed.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-comment w3-xxlarge"></i>
+    <p>Feedback</p>
+  </a>
+
+ <!--  <a href="" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-power-off w3-xxlarge"></i>
+    <p>LOGOUT</p>
+  </a> -->
+</nav><body style="background-color: black;">
+ <!-- <div class="modal fade" id="petmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="exampleModalLabel">order details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form > 
+      <div class="modal-body">--> 
+ <?php
+    $cid = "";
+    $pid = "";
+    $total = "";
+     $link = mysqli_connect("localhost", "root", "", "ecommerce"); 
+     $sql="SELECT * FROM ordertb where status='DELIVERED'";
+
+     $queryfire = mysqli_query($link, $sql);
+    while($product = mysqli_fetch_array($queryfire)){
+      $cid = $product['cid'];
+      $transid = $product['transid'];
+       $date = $product['orderedOn'];
+
+      ?>
+<?php 
+            $sql1 ="SELECT * FROM customer where id='$cid'";
+            $queryfire1 = mysqli_query($link, $sql1);
+            while($product1 = mysqli_fetch_array($queryfire1)){
+           ?>
+          
+           <div id="adddel" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+<br>
+<div class="w3-container" id="menu">
+  <div class="w3-content w3-white w3-round" style="max-width:1000px">
+ 
+    <div class="w3-row w3-center w3-card w3-padding">
+   <div id="pet" class="w3-container w3-padding-48 w3-card">
+   
+           <!-- <div class="modal fade" id="petmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"style="max-width:700px">
+      <div class="modal-header" style="max-width:700px;">
+        <h5 class="modal-title" id="exampleModalLabel">order details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form >
+      <div class="modal-body">   -->
+        <label class="w3-tag w3-large w3-<?php echo $disButton_status ?>w3-round w3-center"><?php echo $product['status'];?></label>
+        <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+          <tr>
+           <th><font color="black"><b>Order ID</b></font></th>
+           <th>
+           <font color="black"><b>Customer ID</b></font></th>
+           <th><font color="black">Customer name</font></th>
+           <th><font color="black"><b>Name</b></font></th>
+            
+<!--           <label><font color="grey">Deliver :</font>&nbsp;<?php echo $product1['name']; ?></label>
+ -->
+           <th><font color="black"><b>Address</b></font></th>
+          <th><font color="black"><b>Pincode</b></font></th>
+           <th><font color="black"><b>Mobile</b></font></th>
+           <th><font color="black"><b>Ordered On</b></font></th>
+           <th><font color="black"><b>Action</b></font> </th>
+           </tr>
+           <tr>
+            <td><?php echo $product['transid']; ?></td>
+            <td>&nbsp;<?php echo $product1['id']; ?></td>
+            <td>&nbsp;<?php echo $product1['name']; ?></td>
+            <td>&nbsp;<?php echo $product['dname']; ?></td>
+            <td>&nbsp;<?php echo $product['daddress']; ?></td>
+            <td>&nbsp;<?php echo $product['dpincode']; ?></td>
+            <td>&nbsp;<?php echo $product['dphone']; ?></td>
+            <td><font size="-2px"> &nbsp;<?php echo $date; ?></font></td>
+            <td><a href="view1.php?id=<?php echo $product['transid'];  ?>"> <button name="view_order"class="w3-button w3-small w3-green w3-hover-grey w3-round">View details</button></a>
+          </tr>
+         </table>
+           
+    </div> 
+  
+
+
+    
+    </div></div></div>
+ 
+
+ 
+</div></div>  
+        <?php
+} 
+     ?>
+      <?php
+} 
+     ?>

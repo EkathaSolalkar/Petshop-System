@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add to cart functionality in php and mysql</title>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+  h2, h3 {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+  td {
+    border-top: none !important;
+  }
+  a
+  {
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+  <?php 
+    session_start();
+
+    require_once('DbConnect.php');
+    $db   = new DbConnect();
+    $conn = $db->connect();
+
+    require 'customer.class.php';
+    $objCustomer = new customer($conn);
+    $objCustomer->setId($_SESSION['cid']);
+    $customer = $objCustomer->getCustomerById();
+
+    require 'cart.class.php';
+    $objCart = new cart($conn);
+    $objCart->setCid($customer['id']);
+    $cartItems = $objCart->getAllCartItems();
+    $cartPrices = $objCart->calculatePrices($cartItems);
+    
+  ?>
+
+  <div class="container well">
+    <center><h2>Billing</h2></center>
+    <hr>
+  <form method="post" action="order.class.php" class="form-horizontal">
+    <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['id'];
+  $query = " SELECT  * FROM `customer` where id='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+      <input type="hidden" name="cid" value="<?php echo $product['id'];?>">
+      <?php
+      }
+      ?> 
+    
+    <input type="hidden" name="tid" id="tid" readonly />
+    <input type="hidden" name="merchant_id" value=""/>
+    <input type="hidden" name="order_id" value=""/>
+    <input type="hidden" name="amount" value="1"/> 
+    <input type="hidden" name="currency" value="INR"/>
+    <input type="hidden" name="redirect_url" value=""/>
+    <input type="hidden" name="cancel_url" value=""/>
+    <input type="hidden" name="language" value=""/>
+
+    <div class="row">
+      <div class="col-md-7 well">
+        <h3>Billing Address</h3>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon addon-diff-color">
+                <span class="fa fa-user">&nbsp;&nbsp;&nbsp;</span>
+            </div>
+
+            <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['id'];
+  $query = " SELECT  * FROM `customer` where id='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+
+            <input class="form-control" type="text" id="billing_name" required="" name="billing_name" placeholder="Deliver Name" value="<?php echo $product['name'];?>">
+            
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon addon-diff-color">
+                <span class="fa fa-phone">&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <input class="form-control" type="text" id="billing_pno" required="" name="billing_pno" placeholder="Deliver Phoneno " value="<?php echo $product['mobile'];?>">
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon addon-diff-color">
+                <span class="fa fa-home">&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <input class="form-control" type="text" id="billing_address" required="" name="billing_address" placeholder="Delivery Address" value="<?php echo $product['address'];?>">
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+
+        <!-- <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon addon-diff-color">
+                <span class="fa fa-home">&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <input class="form-control" type="text" id="billing_city" name="billing_city" placeholder="" value="">
+          </div>
+        </div> -->
+
+        <!-- <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon addon-diff-color">
+                    <span class="fa fa-home">&nbsp;&nbsp;&nbsp;</span>
+                </div>
+                <input class="form-control" type="text" id="billing_state" name="billing_state" placeholder="state" value="">
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon addon-diff-color">
+                    <span class="fa fa-map-marker">&nbsp;&nbsp;&nbsp;</span>
+                </div>
+                <input class="form-control" type="text" id="billing_zip" required="" name="billing_zip" placeholder="Pincode" value="">
+              </div>
+            </div>
+          </div> 
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon addon-diff-color">
+                <span class="fa fa-home">&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <input class="form-control" type="text" id="billing_city" required="" name="billing_city" placeholder="City" value="">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-md-offset-1 well">
+        <div class="text-right">
+          <h3>Your cart</h3>
+          <h4><span class="fa fa-shopping-cart">&nbsp;&nbsp;&nbsp;</span><sup id="itemCount" name="aa"><?= $cartPrices['itemCount']; ?></sup></h4>
+          <table class="table">
+            <tbody>
+              <?php 
+                foreach ($cartItems as $key => $cartItem) { 
+               ?>
+                  
+                <tr>
+
+                  <td align="right" width="85%">
+
+   <!-- <a href="#"><input class="form-control" type="text" id="title" name="title" value="<?=$cartItem['title']; ?>"></a> -->
+    
+     
+              <input type="hidden" name="pid" value="<?= $cartItem['pid']; ?>">
+
+    <input type="hidden" name="edit_id" value="<?= $cartItem['id']; ?>">
+   <strong >
+           <input type="text" readonly name="item" value="    <?= $cartItem['title']; ?>">  
+            </strong>
+
+                  </td>
+                  <td width="15%">
+                    <strong><span></span>&#x20b9;</span><?= ($cartItem['price']*$cartItem['quantity']); ?></strong>
+                  </td>
+              </tr>
+              <?php } ?>
+
+
+            </tbody>
+          </table>
+          <hr style="border: 1px dotted gray;">
+          <p>Total: <strong >
+              <span ></span><input type="text" readonly name="price" value=" &#x20b9; <?= $cartPrices['subTotal']; ?>" >
+            </strong>
+          </p>
+        </div>
+        <div class="text-right">
+         <input type="submit" value="Buy Now" name="buybtn" onclick="addToCart(<?=$cartItem['id'];?>, this.id)" class="btn btn-success btn-block"></a>                  
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div style="position: fixed; bottom: 10px; right: 10px; color: green;">
+    <strong>
+           <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['id'];
+  $query = " SELECT  name FROM `customer` where id='$ap'";
+  $queryfire = mysqli_query($con, $query);
+    while($product = mysqli_fetch_array($queryfire)){
+      ?>  
+    <span><label><font size=6 class="w3-white">Hey,<?php echo $product['name']; ?></font></label></span>
+         <?php   
+    }
+  ?>
+    </strong>
+</div>
+</body>
+</html>

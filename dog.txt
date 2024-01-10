@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		<?php
+include('toggle.php');
+
+
+
+		?> 
+
+	</title>
+	<style type="text/css">
+		.img-fluid mb-2:hover 
+		{
+
+				cursor: pointer;
+				
+			color: black;
+		}
+		
+		.container
+		{
+			float: right;
+		}
+		body
+		{
+			background:url('bgd.jpg');
+			background-size: cover;
+	        height: 100vh;
+		}
+		.dogy
+		{
+			text-decoration: none;
+			color: red;
+		}
+		
+	</style>
+
+<!--<style type="text/css">
+	body
+	{
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		background: #000;
+		font-family: Lucida Handwriting
+	}
+	h1
+	{
+		margin: 0;
+		padding: 0;
+		color: #111;
+		font-size: 16em;
+	}
+	h1 span
+	{
+		display: table-cell;
+		margin: 0;
+		padding: 0;
+		animation: animate 2s linear infinite;
+	}
+	@keyframes animate
+	{
+		0%,100%
+		{
+			color: #fff;
+			filter: blur(2px);
+			box-shadow: 0 0 10px #00b3ff;
+						0 0 20px #00b3ff;
+						0 0 40px #00b3ff;
+						0 0 80px #00b3ff;
+						0 0 120px #00b3ff;
+						0 0 200px #00b3ff;
+						0 0 300px #00b3ff;
+						0 0 400px #00b3ff;
+		}
+		5%,95%
+		{
+			color: #111;
+			filter: blur(0px);
+		}
+	}-->
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Dancing+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--</style>-->
+</head>
+<body class="container">
+	<h1 align="center" ><font color="red"> <u>Dog's Hut</u></font></h1><br>
+		
+
+	<div class="row" style="size: 50px">
+
+<?php
+$con=mysqli_connect('localhost','root');
+mysqli_select_db($con,'dogs');
+
+//{
+//	echo "Connection successfully";
+//}
+//else
+//{
+//	echo "failed";
+//}
+
+$query = "SELECT  `name`, `image`, `price` FROM `dogimg` order by id ASC ";
+$queryfire = mysqli_query($con,$query);
+$num = mysqli_num_rows($queryfire);
+
+if($num > 0)
+{
+	while($product = mysqli_fetch_array($queryfire))
+	{
+		?>
+		<div class="col-lg-3 col-md-3 col-sm-12">
+			<form>
+				<div class="card" align="col-md-3">
+					<h6 class="card-title bg-info text-white p-2 text-uppercase"> <?php echo $product['name'];  ?> </h6>
+					<div class="card-body">
+						<a href=login.php><img src="<?php echo $product['image'];  ?>"  class="img-fluid mb-2"></a>
+
+						<h6> &#8377; <?php echo $product['price']; ?> 
+						<!--<span> (<?php echo $product['discount']; ?>% off) </span>--> </h6>
+
+						<h6 class="badge badge-success"> 4.4 <i class="fa fa-star"></i></h6>
+					</div>
+					<div class="btn-group d-flex">
+
+					<button class="btn btn-success flex-fill "><a href="logn.php">Add to Cart </button></a>
+						<button class="btn btn-warning flex-fill "> Buy Now</button>
+					</div>
+					
+				</div>
+			</form>
+			
+		</div>
+
+
+		<?php
+
+	}
+}
+?>
+</div>
+</body>
+</html>

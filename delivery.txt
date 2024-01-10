@@ -1,0 +1,85 @@
+<?php
+
+$con = mysqli_connect('localhost','root');
+mysqli_select_db($con,'ecommerce');
+// $query = " DELETE FROM workshops WHERE id='$_GET[id]'" ;
+  $link = mysqli_connect("localhost", "root", "", "ecommerce"); 
+
+     $sql="SELECT * FROM ordertb WHERE transid='$_GET[id]'";
+
+     $queryfire = mysqli_query($link, $sql);
+    while($product = mysqli_fetch_array($queryfire))
+      $cid = $product['cid'];
+
+$query = "UPDATE ordertb SET status='DELIVERED' WHERE transid='$_GET[id]'";
+
+if(mysqli_query($con, $query))
+{
+$query1 = " SELECT * FROM customer WHERE id='$cid'" ;
+    // $query = "UPDATE workshops SET status='1' WHERE id='$_GET[id]'";
+    $queryfire = mysqli_query($con, $query1);
+    while($product = mysqli_fetch_array($queryfire)){
+            $to = $product['email'];
+            $subject = "Order Confirmed-from The Bark 'n' Bite Petshop";
+            $message = "Your ordered item has been shipped ";
+            $headers = "From: barknbite10@gmail.com \r\n";
+            $headers .= "MIME Version:1.0" . "\r\n";
+            $headers .= "Content-Type:text/html;charset=UTF-8" . "\r\n";
+
+           if(mail($to,$subject,$message,$headers))
+           {
+            header("refresh:0.000001; url=ds.php");
+            echo "Item Canceled";
+           }
+           else
+           {
+            echo 'Email failed to send,Check your internet connection';  
+           }
+}
+}
+else{
+echo "Failed";
+}
+
+
+?> 
+<!-- stock -->
+<?php
+
+$link = mysqli_connect("localhost", "root", "", "ecommerce"); 
+
+$sql="SELECT * FROM ordertb WHERE transid='$_GET[id]'";
+
+     $queryfire1 = mysqli_query($link, $sql);
+    $product = mysqli_fetch_array($queryfire1);
+      $cid = $product['cid'];
+      //echo($cid);
+     // $transid = $product['transid'];
+     // $date = $product['createdate'];
+     $sql1="SELECT * FROM order_item WHERE transid='$_GET[id]'";
+
+     $queryfire = mysqli_query($link, $sql1);
+    $product1 = mysqli_fetch_array($queryfire);
+     
+      $pid=$product1['pid'];
+      $qty=$product1['qty'];
+      //echo ($pid);
+      //echo ($qty);
+            
+              $sql2="SELECT * FROM workshops WHERE id='$pid'";
+               $queryfire2 = mysqli_query($link, $sql2);
+               while($product2 = mysqli_fetch_array($queryfire2)){
+                 $stock=$product2['stock'];
+                $stock=$stock-$qty;
+             // echo ($stock);
+               $query2 = "UPDATE workshops SET stock='$stock' WHERE id='$pid'";
+               if(mysqli_query($link,$query2)){
+
+               }
+              else
+               {
+                 echo "Failed";
+               }
+
+}
+  ?>

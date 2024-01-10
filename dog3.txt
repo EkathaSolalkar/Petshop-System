@@ -1,0 +1,50 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+	<title>cart</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+
+<body>
+<h2 align="center">Your cart products</h2>
+<table  cellpadding="70%"> 
+	<thead>
+		<tr>
+			<th>
+				SNO
+			</th>
+			<th>NAME</th>
+			<th>IMAGE</th>
+			<th>PRICE</th>
+			<th>UPDATE</th>
+			<th>DELETE</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<?php
+		/*session_start();
+		$id=1;
+		foreach($_SESSION as $product)
+
+		{
+			echo "<tr>";
+			echo "<td>".($id++)."</td>";
+			foreach ($product as $key => $value) {
+				if($key==2){
+					echo "<td>".$value."</td>";
+
+				}
+			}
+			echo "</tr>";
+		}
+
+
+
+		?>
+	</tbody>
+</table>
+</body>
+</html>-->

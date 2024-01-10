@@ -1,0 +1,109 @@
+<?php 
+require_once 'authoController.php'; 
+if (!isset($_SESSION['id'])) 
+{
+  header('location: logn.php');
+  exit();
+}
+?>
+<!DOCTYPE html>
+<html>
+<title>contact</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="des.css">
+
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center w3-black">
+  <!-- Avatar image in top left corner -->
+  <!--<img src="/w3images/avatar_smoke.jpg" style="width:100%">-->
+   <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['id'];
+  $query = " SELECT  image,name FROM `customer` where id='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+      <a href="change_profile.php"> <img src="image_upload/<?php echo $product['image'];?>" class="w3-circle w3-margin-right w3-black w3-hover-shadow" style="width:55%; padding-left: 10px;"></a>
+  <p style="font-size: 15px; text-decoration: none;"><a href="userprofile.php"><?php echo $product['name']; ?></a></p> 
+         <?php   
+    }
+  ?>
+  <a href="test.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="about.php" class="w3-bar-item w3-button w3-padding-large  w3-black w3-hover-shadow">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="cart.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-shopping-cart w3-xxlarge"></i>
+    <p>CART</p>
+  </a>
+  <a href="advice.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-yelp w3-xxlarge"></i>
+    <p>PET ADVICE</p>
+  </a>
+  <a href="admin1/video/video.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-video-camera fa-fw w3-xxlarge"></i>
+    <p>PET CARE VIDEOS</p>
+  </a>
+  <a href="contact.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+   <a href="feedback.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-comment w3-xxlarge"></i>
+    <p>FEEDBACK</p>
+  </a>
+  <a href="index1.php?logout=1" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-power-off w3-xxlarge"></i>
+    <p>LOGOUT</p>
+  </a>
+</nav>
+      <form class="w3-container w3-card-2 w3-padding-1 w3-white" style=" margin-right: 700px;margin-left: 200px;">
+
+<div class="w3-container " id="contact" style="margin-left: 20px;">
+  <div class="w3-row">
+    <div class="w3-col m5"  >
+    <div class="w3-padding-16">
+      <span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span>
+    </div>
+      <h3>Address</h3>
+      <p>Mangalore</p>
+      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>&nbsp;&nbsp;Karnataka</p>
+      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>&nbsp;&nbsp;9663163470 </p>
+      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>&nbsp;&nbsp;8150812679</p>
+
+      <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>&nbsp;&nbsp;barknbite10@gmail.com</p>
+    </div>
+  </div>
+</div>
+</form>
+      <form class="w3-container w3-card-2 w3-padding-1 w3-white" style="padding-left: 10px;padding-right: 10px; margin-left:  820px;margin-top: -15px;">
+
+<div class="w3-container " id="contact" style="margin-left: 20px;">
+
+<!--   <div class="w3-container w3-padding-64 w3-theme-l5" id="contact" style="margin-left: -10px;">
+ -->  <div class="w3-row" style="margin-top: -200px;">
+    <div class="w3-col m5"  > 
+    <div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Veterinary Doctors</span></div>
+      <h3>Address</h3>
+      <p>Mangalore</p>
+      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>&nbsp;&nbsp;Karnataka</p>
+      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>&nbsp;&nbsp;08971024282</p>
+      <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>&nbsp;&nbsp;veterinary@gmail.com</p>
+    </div>
+
+  </div>
+</div>
+</form>
+<br>
+<br>
+<form>
+<!--    <img src="b6.jpg" style="margin-left: 350px;">
+ -->
+       <img src="4.jpg"style="padding-left: 300px;"><img src="4.jpg"><img src="4.jpg">
+ </form>
