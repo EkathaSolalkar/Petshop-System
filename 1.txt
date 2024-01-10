@@ -1,0 +1,195 @@
+<!--request-->
+<!-- <div id="req" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+ -->
+    <!-- Header -->
+    <!-- <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i>Request Order</h5>
+    </header>
+ -->
+ <link rel="stylesheet" href="des.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center w3-black" style="z-index:3;width:300px;">
+
+<a href="adminprofile.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-user fa-fw w3-xxlarge"></i>
+    <p>Admin</p></a>
+  <!-- <p style="font-size: 15px; text-decoration: none;">Admin</p></a>  -->
+  <a href="add.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-plus fa-fw w3-xxlarge"></i>
+    <p>Add Items</p>
+  </a>
+  <a href="video/index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-video-camera fa-fw w3-xxlarge"></i>
+    <p>Upload videos </p>
+  </a>
+  <a href="register.php" class="w3-bar-item w3-button w3-padding-large  w3-black w3-hover-shadow">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>Customer Details</p>
+  </a>
+  <a href="reqorder.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-book fa-fw w3-xxlarge"></i>
+    <p>Orders</p>
+  </a>
+  <a href="report.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-folder fa-fw w3-xxlarge"></i>
+    <p>View Reports</p>
+  </a>
+  <a href="delivery.class.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-motorcycle w3-xxlarge"></i>
+    <p>Delivery</p>
+  </a>
+  <a href="stock.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-sticky-note w3-xxlarge"></i>
+    <p>Stock</p>
+  </a>
+  <a href="feed.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-comment w3-xxlarge"></i>
+    <p>Feedback</p>
+  </a>
+
+  <a href="" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-power-off w3-xxlarge"></i>
+    <p>LOGOUT</p>
+  </a>
+</nav>
+<body style="background-color: black;">
+    <?php
+    $cid = "";
+    $pid = "";
+    $total = "";
+     $link = mysqli_connect("localhost", "root", "", "ecommerce"); 
+     $sql="SELECT * FROM ordertb where status='ORDERED'";
+
+     $queryfire = mysqli_query($link, $sql);
+    while($product = mysqli_fetch_array($queryfire)){
+      $cid = $product['cid'];
+      $transid = $product['transid'];
+       $date = $product['orderedOn'];
+      ?>
+          
+
+           <?php 
+            $sql1 ="SELECT * FROM customer where id='$cid'";
+            $queryfire1 = mysqli_query($link, $sql1);
+            while($product1 = mysqli_fetch_array($queryfire1)){
+           ?>
+
+            
+              
+
+     
+       <div class="w3-content w3-grey w3-round" style="max-width:700px">
+     <div class="w3-row w3-padding"> 
+<!--       <label class="w3-tag w3-black w3-round w3-right w3-large"><i class="fa fa-calendar"></i> <?php echo $date; ?></label>
+          <br>
+      <label><font color="grey">Customer mob number</font></label>
+      <br>
+      <div class="w3-tag w3-round"> 
+        <label><font size=5><?php echo $product1['mobile']; ?></font></label>
+      </div> -->
+      <br> 
+      
+           <label><font color="black"><b>Order ID:</b></font><?php echo $product['transid']; ?></label>
+           <br>
+           <label><font color="black"><b>Customer ID:</b></font>&nbsp;<?php echo $product1['id']; ?></label>
+           <br>
+           <!-- <label><font color="grey">Customer name:</font>&nbsp;<?php echo $product1['name']; ?></label>
+           <br> -->
+          <label><font color="black"><b>Name:</b></font>&nbsp;<?php echo $product['dname']; ?></label>
+            <br>
+<!--           <label><font color="grey">Deliver :</font>&nbsp;<?php echo $product1['name']; ?></label>
+ -->
+           <label><font color="black"><b>Address:</b></font>&nbsp;<?php echo $product['daddress']; ?></label>
+           <br>
+           <label><font color="black"><b>Pincode:</b></font>&nbsp;<?php echo $product['dpincode']; ?></label>
+           <br>
+           <label><font color="black"><b>Mobile:</b></font>&nbsp;<?php echo $product['dphone']; ?></label>
+           <br>
+           <label><font color="black"><b>Ordered On:</b></font>&nbsp;<?php echo $date; ?></label>
+           <br>
+           <br>
+           <label><b>Orderd item</b></label>
+           <br>
+           <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+              <th><b>item id</b></th>
+              <th><b>Quantity</b></th>
+              <th><b>item name</b></th>
+              <th><b>Item Price</b></th>
+              <th><b>SubTotal</b></th>
+            </tr>
+            <?php 
+            $sql3 ="SELECT * FROM order_item where transid='$transid'";
+            $queryfire3 = mysqli_query($link, $sql3);
+            while($product3 = mysqli_fetch_array($queryfire3))
+            {
+            $pid = $product3['pid'];
+            // $total = $product3['total'];
+           ?> 
+           <?php 
+                $sql2 ="SELECT * FROM workshops where id= '$pid'";
+              
+                $queryfire2 = mysqli_query($link, $sql2);
+                while($product2 = mysqli_fetch_array($queryfire2)){
+              ?>
+              <tr>
+              <td><?php echo $product2['id']; ?></td>
+              <td><?php echo $product3['qty']; ?></td>
+              <td><?php echo $product2['title']; ?></td>
+              <td>&#8377;<?php echo $product2['price']; ?></td>
+              <?php $subtotal=($product2['price'] * $product3['qty']); ?>
+              <td>&#8377;<?php echo $subtotal;?></td>
+             </tr>
+            <?php
+  }
+     ?>  
+ <?php
+} 
+     ?>   
+           </table>
+          <font size=5 class="w3-left" color="black"></font>
+          <br>
+           <?php 
+            $sql4 ="SELECT * FROM order_item where transid='$transid'";
+            $queryfire4 = mysqli_query($link, $sql4);
+            while($product4 = mysqli_fetch_array($queryfire4))
+            {}
+              $query="SELECT total, SUM(total) FROM order_item where transid='$transid'";
+              $result=mysqli_query($link,$query);
+              while ($row=mysqli_fetch_array($result)) 
+            
+                                       echo "Total Amount:&#8377;".$row['SUM(total)'];
+
+           // $pid = $product3['pid'];
+             // $total = $product4['total'];
+            ?>
+               
+ 
+              <br>
+              <br>
+         <a href="delivery.php?id=<?php echo $product['transid'];  ?>"> <button name="proceed"class="w3-button w3-small w3-green w3-hover-grey w3-round">Proceed</button></a>
+         <a href="cancel.php?id=<?php echo $product['transid'];  ?>"> <button class="w3-button w3-small w3-red w3-hover-grey w3-round">Cancel</button></a>
+    </div> 
+  </div>
+  <br>
+
+  <?php
+} 
+     ?>
+
+  <?php
+} 
+     ?>
+    <!-- Footer -->
+    <!-- <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4>FOOTER</h4>
+      <p>Powered by <a href="http://localhost/pro/sd.html" target="_blank">The Caffiene Hub</a></p>
+    </footer>
+  </div>
+</div> -->
+<!--request end-->
+
+</body>
