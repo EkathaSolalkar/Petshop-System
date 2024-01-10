@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>about us page</title>
+	<?php
+include('toggle.php');
+
+	?>
+	
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Quicksand:300');
+		body
+		{
+			margin: 0;
+			padding: 0;
+
+			background:url('bgd.jpg');
+			background-size: cover;
+	        height: 100vh;
+			
+			font-family: Lucida Handwriting;
+		}
+		
+		.neon
+		{
+			position: absolute;
+			top: 10%;
+			left: 35%;
+			transform: translate(-20%,-20%);
+			margin: 0;
+			padding: 0px;
+			font-size: 4em;
+			color: navy blue;
+			text-shadow: 0 0 20px blue ;
+
+		}
+		.abt
+		{
+			position: absolute;
+			top: 20%;
+			left: 20%;
+			right: 20%;
+			color: black;
+			font-size: 25px;
+			font-family: Times new Roman;
+			
+		}
+		
+</style>
+</head>
+<body>
+
+	
+<h2 class="neon">Bark 'n' Bite Pet shop</h2>
+
+<div class="abt">
+
+<h3 align="center"><u>Online pet shop for pets, pet's food and accessories</u></h3>
+<p>
+Welcome to our Pet Zone. What we bring at your doorstep is only the very best in our site .Daily Nutrition and Care tips, plus everything else that concerns your beloved furry pals is with us. Simply, choose your pet's favorite products, place an order and we will make them appear at your doorstep in no time; Almost Like Magic!
+
+<br>
+What do we offer?
+ 
+We stop at nothing, in offering a quality selection of your pet's everyday needs. Our Fast and Free India wide shipping service extends to 1200+major cities  with an elaborate selection of 900+ products from all popular brands in dog, cat and fish supplies available in the Indian Pet Care Industry and then some more…Our customer service team is a zealous lot to ensure a online shopping experience for the pet parents who shop with us.
+
+How do we do it?
+We are continuously tethering with the market logistics whilst churning out the best deals for our site visitors. How we are able to provide you unearthly discounts on most popular dog and cat food brands, fish food and Aquarium supplies, is by simply erasing the clichéd middle man and by passing the supply chain benefits directly to the end user.
+
+It is simple logic but when we do it our way, it empowers the pet owners; ensures that the joy of pet parenting is experienced in the most hassle free-way by animal lovers in India.
+
+Again, when you have a mentorship that together brings 15+ years of experience in creating online successes, you don't expect nothing less than a miracle. Scores and herds of Dog owners, Cat Parents, Aquarium Hobbyists and Pet Lovers from across India have benefitted from our venture and will continue to do so. Once again, Welcome to Pets world.</p></div>
+
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<title>Pet shopping</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="des.css"><!--CSS file-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+<!--<link rel="stylesheet" type="text/css" href="fontawesome-free-5.12.0-web/css/all.css">
+script for font-->
+<style>
+  
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: 
+  min-height: 75%;    
+}
+
+.menu {
+  display: none;
+ 
+}
+img{
+border-radius:3%;
+border:2px solid lightgrey;
+background-attachment:fixed;
+}
+</style>
+
+<body c9lass="w3-light-grey">
+
+<!-- Top container -->
+<!--<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <span class="w3-bar-item w3-right"><img src="ch2.png" width="30" height="30">&nbsp;The Caffeine Hub</span>
+</div>
+<br>-->
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-black w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row w3-b">
+    <div class="w3-col s4">
+      <img src="l.png" class="w3-circle w3-margin-right" style="width:56px">
+    </div>
+    <div class="w3-col s8 w3-bar" style="margin-top:-6px;">
+
+      <font color="white" size=4>
+      Welcome:&nbsp;<strong>Priya</strong>
+       <button class="w3-button w3-white w3-round w3-small w3-hover-grey"><i class="fa fa-power-off"></i>&nbsp;Logout</button>
+    </font>
+    <!--
+      <a href="#" class="w3-bar-item w3-button">hi<i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+    -->
+    </div>
+  </div>
+  <hr>
+ 
+ <!--side bar code-->
+  <div class="w3-bar-block">
+ <a href="#" class="w3-bar-item w3-button w3-padding w3-hide-large w3-white w3-hover-grey w3-hover-black fa fa-window-close" onclick="w3_close()" title="close menu">&nbsp;close</a>
+  <div class="w3-container w3-b">
+    <h5>Admin</h5>
+  </div>
+<a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green w3-black" onclick="openMail('adddel');w3_close();" id="firstTab">
+        <div class="w3-container">
+            <span href="#" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fa fa-plus fa-fw"></i> Add/Delete items</span>
+      </div>
+    </a>
+
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green" onclick="openMail('vreport');w3_close();">
+      <div class="w3-container">
+            <span href="#" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fa fa-folder fa-fw"></i> View Reports</span>
+      </div>
+    </a>
+    <!--
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green" onclick="openMail('empdet');w3_close();">
+      <div class="w3-container">
+            <span href="#" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fa fa-users fa-fw"></i>&nbsp; Employee Details</span>
+      </div>
+    </a>
+    -->
+     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green w3-black" onclick="openMail('custdet');w3_close();">
+      <div class="w3-container">
+        <span href="#" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fa fa-male fa-fw"></i>  Customer Details</span>
+      </div>
+    </a>
+
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green" onclick="openMail('req');w3_close();">
+      <div class="w3-container">
+          <span href="#" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fa fa-book fa-fw"></i> Request order</span>
+      </div>
+    </a>
+
+     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green w3-black" onclick="openMail('orders');w3_close();">
+      <div class="w3-container">
+            <span href="#" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fa fa-clipboard fa-fw"></i> Orders</span>
+      </div>
+    </a>
+
+     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green" onclick="openMail('delivery');w3_close();">
+      <div class="w3-container">
+          <span href="#" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fa fa-motorcycle"></i> Delivery</span>
+      </div>
+    </a>
+
+ </div>
+
+</nav>
+
+<!--adddel-->
+<div id="adddel" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i> Add/Delete Items</h5>
+    </header>
+<br>
+<div class="w3-container" id="menu">
+  <div class="w3-content w3-white w3-round" style="max-width:900px">
+ 
+    <div class="w3-row w3-center w3-card w3-padding">
+      <a href="javascript:void(0)" onclick="openMenu(event, 'shake');" id="myLink">
+       
+      </a>
+    </div>
+
+    <div id="shake" class="w3-container w3-padding-48 w3-card">
+      
+    <div class="w3-container">
+       <div class="w3-container">
+       <h5>Add items</h5>
+       <form action="admin_insert.php" method="POST">
+         <input type="file"  onchange="onFileSelected(event)" hidden id="sham" name="timage">
+   <label for="sham"> <img id="myimage" height="200" width="200px" alt=" &nbsp;Click here to select image &nbsp;"><label>
+<!--          <input class="w3-white w3-hover-grey w3-round" type="file" name="timage" >
+ -->         <br>
+         <br> 
+         <label>Enter item name</label>
+         <br>
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="text" placeholder="Enter item name" name="tname" required>
+         <br>
+         <label>Enter item price</label>
+         <br>
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="text" placeholder="Enter item price" name="tprice" required>
+         <br>
+         <label>Enter type</label>
+         <br>
+
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="shake" id="shake" placeholder="Enter item price" name="tshake" required>Dogs
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="cake" id="cake" placeholder="Enter item price" name="tshake" required>Cats
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="cream" id="cream" placeholder="Enter item price" name="tshake" required>Rabbits
+         <br>
+
+         <input type="submit" name="Submit" class="w3-button w3-black w3-round w3-small w3-hover-grey"><i class=""></i></button>
+       </form>
+    </div>
+    <br>
+
+<table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+    <tr>
+      <th>ID</th>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Show</th>
+      <th>Hide</th>
+      <th>Edit</th>
+      <th>Remove</th>
+    </tr>
+
+    <?PHP
+
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $query = " SELECT  * FROM `workshops` ";
+  $queryfire = mysqli_query($con, $query);
+    while($product = mysqli_fetch_array($queryfire)){
+      ?>
+      <tr>
+      <td><?php echo $product['id'];  ?></td>
+      <td><?php echo $product['type'];  ?></td>
+      <td><?php echo $product['title'];  ?></td>
+      <td><?php echo $product['price'];  ?></td>
+       <?php
+                $disButton="";
+                if($product['status']==1)
+                {
+                  $disButton = "disabled";
+                }
+                ?>
+      <td><a href="show.php?id=<?php echo $product['id'];  ?>"><button <?php echo $disButton; ?> class="w3-button w3-green w3-round w3-small w3-hover-white"><i class="fa fa-eye"></i>&nbsp;Show</button></a></td>
+       <?php
+                $disButton1="";
+                if($product['status']==0)
+                {
+                  $disButton1 = "disabled";
+                }
+                ?>
+      <td><a href="hide.php?id=<?php echo $product['id'];  ?>"><button <?php echo $disButton1; ?> class="w3-button w3-red w3-round w3-small w3-hover-white"><i class="fa fa-eye-slash"></i>&nbsp;Hide</button></a></td>
+      <td><a href="edit.php?id=<?php echo $product['id'];  ?>"><button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-cogs"></i>&nbsp;Edit</button></a></td>
+      <td><a href="removeitem.php?id=<?php echo $product['id'];  ?>"><button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-trash"></i>&nbsp;Remove</button></a></td>
+    <?php   
+    }
+  ?>
+  </table>
+      
+    </div>
+    </div>
+
+    
+    
+  </div>
+</div>
+
+
+     <br>
+
+
+
+<!--
+      <h5>View/Delete items</h5>
+      <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+        <tr>
+          <td> <img src="http://localhost/pro/Espresso.jpg" width="200"></td>
+          <td><font size=4>Expresso</font></td>
+          <td><font size=4>70</font></td>
+      <br>
+          <th><button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-arrow-right"></i>&nbsp;Remove</button></th>
+        </tr>
+        
+        <tr>
+          <td> <img src="http://localhost/pro/coffee.jpg" width="200"></td>
+          <td><font size=4>Coffee</font></td>
+          <td><font size=4>80</font></td>
+       
+          <td> <button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-arrow-right"></i>&nbsp;Remove</button></td>
+        </tr>
+      </table><br>
+  
+    </div>
+  -->
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4>FOOTER</h4>
+      <p>Powered by <a href="test.php" target="_blank">The BB Pet Zone</a></p>
+    </footer>
+  </div>
+</div>
+<!--adddel end-->
+
+<!--orders-->
+<div id="orders" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i> Orders</h5>
+    </header>
+
+    <div class="w3-content w3-white w3-round" style="max-width:500px">
+    <div class="w3-row w3-padding">
+           <label>Order ID: 01</label>
+           <br>
+           <label>Orderd item</label>
+           <br>
+           <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+              <th><b>item id</b></th>
+              <th><b>item name</b></th>
+            </tr>
+              <td>01</td>
+              <td>Buttershake</td>
+           </table>
+          <font size=5 class="w3-left" color="black"></font>
+          <br>
+          <button class="w3-button w3-small w3-black w3-hover-grey w3-round">Prepared</button>
+    </div> 
+  </div>
+  <br>
+   <div class="w3-content w3-white w3-round" style="max-width:500px">
+    <div class="w3-row w3-padding">
+           <label>Order ID: 01</label>
+           <br>
+           <label>Orderd item</label>
+           <br>
+           <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+              <th><b>item id</b></th>
+              <th><b>item name</b></th>
+            </tr>
+              <td>01</td>
+              <td>Buttershake</td>
+           </table>
+          <font size=5 class="w3-left" color="black"></font>
+          <br>
+          <button class="w3-button w3-small w3-black w3-hover-grey w3-round">Prepared</button>
+    </div> 
+  </div>
+    <br>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4>FOOTER</h4>
+      <p>Powered by <a href="test.php" target="_blank">The BB Pet Zone</a></p>
+    </footer>
+  </div>
+</div>
+<!--orders end-->
+
+<!--vreport-->
+<div id="vreport" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i> View report</h5>
+    </header>
+    <div class="w3-content w3-white w3-round" style="max-width:1000px">
+    <div class="w3-row w3-padding">
+      <lable><font size=3 color=grey><b>Order ID - 01</b></font></lable>
+      <label class="w3-tag w3-green w3-round w3-right">Delivered</label>
+      <hr>
+      <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+              <th><b>Item name</b></th>
+              <th><b>Item price</b></th>
+            </tr>
+            <tr>
+              <td>Buttershake</td>
+              <td>110</td>
+            </tr>
+            <tr>
+              <td>Cake</td>
+              <td>30</td>
+            </tr>
+      </table>
+      <br>
+      <lable><font size=4 color=grey>Total- </font><b><font size=5>?140</font></b></lable>
+      <hr>
+      <lable><font size=3 color=grey><b>Delivery details</b></font></lable>
+      <br>
+      <b>
+      Deepesh M Bangera
+      Manipal tower,Manipal
+      </b>
+      <br>
+      <lable><font size=3 color=grey><b>Phone number:</b></font><b>9164650859</b></lable>
+      <hr>
+      <label class="w3-tag w3-black w3-round w3-right w3-large"><i class="fa fa-calendar"></i> 3-01-2010</label>
+    <!-- End order content -->
+  </div>
+</div>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4>FOOTER</h4>
+      <p>Powered by <a href="test.php" target="_blank">The BB Pet Zone</a></p>
+    </footer>
+  </div>
+</div>
+<!--vreport end-->
+
+<!--cust details-->
+<div id="custdet" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i> Customer details</h5>
+    </header>
+    <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-round w3-striped w3-bordered w3-border w3-hoverable w3-white">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Phone num</th>
+      <th>E-mail</th>
+      <th>Edit</th>
+      <th>Remove</th>
+    </tr>
+
+    <?PHP
+
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $query = " SELECT  * FROM `customer` ";
+  $queryfire = mysqli_query($con, $query);
+    while($product = mysqli_fetch_array($queryfire)){
+      ?>
+      <tr>
+      <td><?php echo $product['id'];  ?></td>
+      <td><?php echo $product['name'];  ?></td>
+      <td><?php echo $product['mobile'];  ?></td>
+      <td><?php echo $product['email'];  ?></td>
+      <td><a href="regsedit.php?id=<?php echo $product['id'];  ?>"><button class="w3-button w3-black w3-round w3-small w3-hover-white" name="edit_btn"><i class="fa fa-cogs"></i>&nbsp;Edit</button></a></td>
+      <td><a href="userdelete.php?id=<?php echo $product['id'];  ?>"><button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-arrow-right"></i>&nbsp;Remove</button></a></td>
+    <?php   
+    }
+  ?>
+  </table>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4>FOOTER</h4>
+      <p>Powered by <a href="test.php" target="_blank">The BB Pet Zone</a></p>
+    </footer>
+  </div>
+</div>
+<!--cust details end-->
+
+<!--request-->
+<div id="req" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i>Request Order</h5>
+    </header>
+
+       <div class="w3-content w3-white w3-round" style="max-width:500px">
+    <div class="w3-row w3-padding">
+      <label>Customer mob number</label>
+      <br>
+      <div class="w3-tag w3-round"> 
+        <label><font size=5>8768654678</font></label>
+      </div>
+      <br>
+           <label>Order ID: 01</label>
+           <br>
+           <label>Customer ID:&nbsp;01</label>
+           <br>
+           <label>Customer name:&nbsp;Deepesh</label>
+           <br>
+           <label>Localtion:&nbsp;Manipal</label>
+           <br>
+           <br>
+           <label>Orderd item</label>
+           <br>
+           <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+              <th><b>item id</b></th>
+              <th><b>item name</b></th>
+            </tr>
+              <td>01</td>
+              <td>Buttershake</td>
+           </table>
+          <font size=5 class="w3-left" color="black"></font>
+          <br>
+          <button class="w3-button w3-small w3-green w3-hover-grey w3-round">Proceed</button>
+          <button class="w3-button w3-small w3-red w3-hover-grey w3-round">Delete</button>
+    </div> 
+  </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4>FOOTER</h4>
+      <p>Powered by <a href="http://localhost/pro/sd.html" target="_blank">The Caffiene Hub</a></p>
+    </footer>
+  </div>
+</div>
+<!--request end-->
+
+<!--Delivery details-->
+<div id="delivery" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i>Delivery</h5>
+    </header>
+      <div class="w3-content w3-white w3-round" style="max-width:500px">
+    <div class="w3-row w3-padding">
+           <label>Order ID: 01</label>
+           <br>
+           <label>Customer ID:&nbsp;01</label>
+           <br>
+           <label>Customer name:&nbsp;Deepesh</label>
+           <br>
+           <label>Customer mob number:&nbsp;8768654678</label>
+           <br>
+           <label>Localtion:&nbsp;Manipal</label>
+           <br>
+           <label>Address: Mia Nagar,Mia Cross,Mia residency</label>
+           <br>
+           <br>
+           <label>Orderd item</label>
+           <br>
+           <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+              <th><b>item id</b></th>
+              <th><b>item name</b></th>
+            </tr>
+              <td>01</td>
+              <td>Buttershake</td>
+           </table>
+          <font size=5 class="w3-left" color="black"></font>
+          <br>
+          <button class="w3-button w3-small w3-black w3-hover-grey w3-round">Delivered</button>
+    </div> 
+  </div>
+
+  <br>
+
+  <div class="w3-content w3-white w3-round" style="max-width:500px">
+    <div class="w3-row w3-padding">
+           <label>Order ID: 01</label>
+           <br>
+           <label>Customer ID:&nbsp;01</label>
+           <br>
+           <label>Customer name:&nbsp;Deepesh</label>
+           <br>
+           <label>Customer mob number:&nbsp;8768654678</label>
+           <br>
+           <label>Localtion:&nbsp;Manipal</label>
+           <br>
+           <label>Address: Mia Nagar,Mia Cross,Mia residency</label>
+           <br>
+           <br>
+           <label>Orderd item</label>
+           <br>
+           <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            <tr>
+              <th><b>item id</b></th>
+              <th><b>item name</b></th>
+            </tr>
+              <td>01</td>
+              <td>Buttershake</td>
+           </table>
+          <font size=5 class="w3-left" color="black"></font>
+          <br>
+          <button class="w3-button w3-small w3-black w3-hover-grey w3-round">Delivered</button>
+    </div> 
+  </div>
+
+    
+   
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4><i class="fa fa-instagram"></i></h4>
+      <p>Powered by <a href="sd.php" target="_blank">The Caffiene Hub</a></p>
+    </footer>
+  </div>
+</div>
+<!--Delivery details end-->
+
+<div id="John" class="w3-container person">
+  <br>
+  <img class="w3-round w3-animate-top" src="/w3images/avatar2.png" style="width:20%;">
+  <h5 class="w3-opacity">Subject: None</h5>
+  <h4><i class="fa fa-clock-o"></i> From John Doe, Sep 23, 2015.</h4>
+  <a class="w3-button w3-light-grey">Reply<i class="w3-margin-left fa fa-mail-reply"></i></a>
+  <a class="w3-button w3-light-grey">Forward<i class="w3-margin-left fa fa-arrow-right"></i></a>
+  <hr>
+  <p>Welcome.</p>
+  <p>That's it!</p>
+</div>
+     
+</div>
+ 
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+
+function openMenu(evt, menuName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menu");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+  }
+  document.getElementById(menuName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+}
+document.getElementById("myLink").click();
+
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+var openInbox = document.getElementById("myBtn");
+openInbox.click();
+
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+function myFunc(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show"; 
+    x.previousElementSibling.className += " w3-red";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+    x.previousElementSibling.className = 
+    x.previousElementSibling.className.replace(" w3-red", "");
+  }
+}
+
+openMail("Borge")
+function openMail(personName) {
+  var i;
+  var x = document.getElementsByClassName("person");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  /*
+  x = document.getElementsByClassName("test");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" w3-light-grey", "");
+  }*/
+  document.getElementById(personName).style.display = "block";
+ /* evt.currentTarget.firstElementChild.className += " w3-dark-grey";*/ 
+}
+</script>
+
+<script>
+var openTab = document.getElementById("firstTab");
+openTab.click();
+</script>
+
+<script>
+function onFileSelected(event) {
+  var selectedFile = event.target.files[0];
+  var reader = new FileReader();
+
+  var imgtag = document.getElementById("myimage");
+  imgtag.title = selectedFile.name;
+
+  reader.onload = function(event) {
+    imgtag.src = event.target.result;
+  };
+
+  reader.readAsDataURL(selectedFile);
+}
+</script>
+
+</body>
+</html>
+

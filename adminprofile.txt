@@ -1,0 +1,328 @@
+<?php
+include('security.php');
+?>
+<!DOCTYPE html>
+<html>
+<title>Pet shopping</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="des.css"><!--CSS file-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+<!--<link rel="stylesheet" type="text/css" href="fontawesome-free-5.12.0-web/css/all.css">
+script for font-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+  
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: 
+  min-height: 75%;    
+}
+
+.menu {
+  display: none;
+ 
+}
+img{
+border-radius:3%;
+border:2px solid lightgrey;
+background-attachment:fixed;
+}
+</style>
+
+
+<body c9lass="w3-light-grey" style="background-color: black;">
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center w3-black" style="z-index:3;width:300px;">
+  <!-- Avatar image in top left corner -->
+  <br>
+  <br>
+ <!--   <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['id'];
+  $query = " SELECT  image FROM `admintb` where id='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+      <img src="<?php echo $product['image'];?>" class="w3-circle w3-margin-right w3-black w3-hover-shadow" style="width:55%; padding-left: 10px;">
+         <?php   
+    }
+  ?> -->
+  <?PHP
+//session_start();
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['username'];
+  $query = " SELECT *FROM `admintb` where username='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+ <a href="ds.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-user fa-fw w3-xxlarge"></i>
+        <p><b>Welcome &nbsp;&nbsp;<?php echo $product['name'];?></b></p></a><?php } ?>
+
+<a href="adminprofile.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users fa-fw w3-xxlarge"></i>
+    <p>Add Admin</p>
+  </a>
+  <a href="add.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-plus fa-fw w3-xxlarge"></i>
+    <p>Add Items</p>
+  </a>
+  <a href="video/index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-video-camera fa-fw w3-xxlarge"></i>
+    <p>Upload videos </p>
+  </a>
+  <a href="register.php" class="w3-bar-item w3-button w3-padding-large  w3-black w3-hover-shadow">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>Customer Details</p>
+  </a>
+  <a href="reqorder.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-book fa-fw w3-xxlarge"></i>
+    <p>Orders</p>
+  </a>
+  <a href="report.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-folder fa-fw w3-xxlarge"></i>
+    <p>View Reports</p>
+  </a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-motorcycle w3-xxlarge"></i>
+    <p>Delivery</p>
+  </a>
+  <a href="Stock.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-sticky-note w3-xxlarge"></i>
+    <p>Stock</p>
+  </a>
+   <a href="feed.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-comment w3-xxlarge"></i>
+    <p>Feedback</p>
+  </a>
+
+  <!-- <a href="index1.php?logout=1" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-power-off w3-xxlarge"></i>
+    <p>LOGOUT</p>
+  </a> -->
+</nav>
+
+<!-- <nav class="w3-sidebar w3-collapse w3-black w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+     
+       <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['id'];
+  $query = " SELECT  image FROM `admintb` where id='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?>--> 
+      <!-- <div class="w3-col s4">
+      <img src="<?php echo $product['image'];?>"class="w3-circle w3-margin-right" style="width:46px">
+  </div> -->
+  <!-- <a href="adminprofile.php"> <img src="<?php echo $product['image'];?>" class="w3-circle w3-margin-right w3-black w3-hover-shadow" style="width:55%; padding-left: 10px;">
+  <p style="font-size: 15px; text-decoration: none;">User</p></a> 
+    <?php
+  }
+  ?>
+    
+    <div class="w3-col s8 w3-bar">
+     <a href=""> <span>Admin Profile</span></a><br> -->
+      <!-- <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a> -->
+    <!-- </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5><u>Admin Dashboard</u></h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+    
+    <a href="add.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-plus fa-fw"></i>&nbsp; Add items</a>
+    <a href="register.php" class="w3-bar-item w3-button w3-padding "><i class="fa fa-male fa-fw"></i>&nbsp;  Customer details</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Traffic</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>&nbsp; Geo</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>&nbsp; Orders</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>&nbsp; News</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>&nbsp; General</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>&nbsp; History</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a><br><br>
+  </div>
+</nav> --> 
+<!--adddel-->
+<div id="adddel" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <!-- <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i> Add/Delete Items</h5>
+    </header> -->
+<br>
+<div class="w3-container" id="menu">
+  <div class="w3-content w3-white w3-round" style="max-width:900px">
+ 
+    <div class="w3-row w3-center w3-card w3-padding">
+     <!--  <a href="javascript:void(0)" onclick="openMenu(event, 'shake');" id="myLink">
+       
+      </a> -->
+    </div>
+
+    <div id="pet" class="w3-container w3-padding-48 w3-card">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+   
+
+
+<!-- Modal -->
+<div class="modal fade" id="petmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add admin member</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <?php
+if(isset($_SESSION['success']) && $_SESSION['success'] !='')
+{
+  echo '<h2 class="bg-primary text-white">' . $_SESSION['success'].'</h2>';
+  unset($_SESSION['success']);
+}
+if(isset($_SESSION['status']) && $_SESSION['status'] !='')
+{
+  echo '<h2 class="bg-danger text-white">' . $_SESSION['status'].'</h2>';
+  unset($_SESSION['status']);
+}
+
+  ?>
+
+
+      <form action="admin_member.php" method="POST" enctype="multipart/form.data">
+      <div class="modal-body">
+
+        <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="tname" class="form-cotrol" placeholder="Enter name" required>
+              </div>
+
+              <div class="form-group">
+                <label>Mobile</label>
+                <input type="text" name="tmobile" class="form-cotrol" placeholder="Enter Mobile no" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="Email" name="temail" class="form-cotrol" placeholder="Enter Email" required>
+              </div>
+<!-- 
+              <div class="form-group">
+                <label>Add Pet/Pet product</label>
+                <br>
+ -->             <!--   <input type="file" name="timage" id="pet_image" class="form-cotrol" required>-->
+          <!--    <input type="file"  onchange="onFileSelected(event)" hidden id="sham" name="timage">
+   <label for="sham"> <img id="myimage" height="200" width="200px" alt=" &nbsp;Click here to select image &nbsp;">
+              </div> -->
+
+        <div class="form-group">
+                <label>Address</label>
+                <input type="text" name="taddress" class="form-cotrol" placeholder="Enter address" required>
+              </div>
+               <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="tuser" class="form-cotrol" placeholder="Enter username" required>
+              </div>
+               <div class="form-group">
+                <label>Password</label>
+                <input type="Password" name="tpass" class="form-cotrol" placeholder="Enter password" required>
+              </div>
+               <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="Password" name="tconf" class="form-cotrol" placeholder="Enter Conform password" required>
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" name="Submit" class="btn btn-primary">Save</button>
+      </div>
+  </form>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+  
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="a.0 font-weight-bold text-primary "> Add Member
+  
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#petmodal">
+  add data
+</button>
+      </h6>
+    </div>
+    <br>
+    <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+<tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Username</th>
+<!--           <th>Password</th>
+ -->          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+        <?php
+        $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $query = " SELECT  * FROM `admintb` ";
+  $queryfire = mysqli_query($con, $query);
+    while($product = mysqli_fetch_array($queryfire)){
+      ?>
+        <!-- if(mysqli_num_rows($query_run)> 0)
+        {
+          while($row=mysqli_fetch_assoc($query_run))
+          {
+            ?> -->
+        <tr>
+          <td><?php echo $product['id']; ?></td>
+          <td><?php echo $product['name']; ?></td>
+          <td><?php echo $product['email']; ?></td>
+          <td><?php echo $product['mobile']; ?></td>
+
+          <td><?php echo $product['address']; ?></td>
+          <td><?php echo $product['username']; ?></td>
+<!--           <td><?php echo $product['password']; ?> </td>
+ -->          <td>
+            <form action="admedit.php" method="post">
+              <input type="hidden" name="edit_id" value="<?php echo $product['id']; ?>">
+            <button type="submit" name="edit_btn" class="btn btn-success w3-black w3-hover-white">EDIT</button>
+          </form>
+          </td>
+          <td>
+            <form action="admedit.php" method="post">
+              <input type="hidden" name="delete_id" value="<?php echo $product['id']; ?>">
+            <button type="submit" name="delete_btn" class="btn btn-danger w3-hover-white">DELETE</button>
+          </form>
+          </td>
+        </tr>
+            <?php
+          }
+          ?>
+</body>
+</html>

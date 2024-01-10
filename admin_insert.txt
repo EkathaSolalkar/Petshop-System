@@ -1,0 +1,20 @@
+<?php
+        if(isset($_POST['Submit']))
+        {
+        $sname = $_POST['tname'];
+        $simage = $_POST['timage'];
+        $sprice = $_POST['tprice'];
+        $spet = $_POST['tpet'];
+        $sdescp=$_POST['tdescp'];
+        $squantity=$_POST['tquantity'];
+        $con=mysqli_connect('localhost','root','','ecommerce');
+       $sql = "INSERT INTO workshops (title,image,price,description,type,stock) VALUES ('$sname','$simage','$sprice','$sdescp','$spet','$squantity')";
+        
+        $query=mysqli_query($con,$sql);
+        if($query)
+        header("refresh:0.000001; url=ds.php");
+        echo ($sname);
+        echo ' is inserted successfully'; 
+        
+        }
+?>

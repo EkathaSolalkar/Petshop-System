@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<title>Pet shopping</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="des.css"><!--CSS file-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--<link rel="stylesheet" type="text/css" href="fontawesome-free-5.12.0-web/css/all.css">
+script for font-->
+<style>
+  
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: 
+  min-height: 75%;    
+}
+
+.menu {
+  display: none;
+ 
+}
+img{
+border-radius:3%;
+border:2px solid lightgrey;
+background-attachment:fixed;
+}
+</style>
+
+
+<body c9lass="w3-light-grey">
+
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center w3-black" style="z-index:3;width:300px;">
+  <!-- Avatar image in top left corner -->
+  <br>
+  <br>
+ <!--   <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['id'];
+  $query = " SELECT  image FROM `admintb` where id='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+      <img src="<?php echo $product['image'];?>" class="w3-circle w3-margin-right w3-black w3-hover-shadow" style="width:55%; padding-left: 10px;">
+         <?php   
+    }
+  ?> -->
+  <?PHP
+session_start();
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['username'];
+  $query = " SELECT *FROM `admintb` where username='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+ <a href="ds.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-user fa-fw w3-xxlarge"></i>
+        <p><b>Welcome &nbsp;&nbsp;<?php echo $product['name'];?></b></p></a><?php } ?>
+
+<a href="adminprofile.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users fa-fw w3-xxlarge"></i>
+    <p>Add Admin</p>
+  </a>
+  <a href="add.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-plus fa-fw w3-xxlarge"></i>
+    <p>Add Items</p>
+  </a>
+  <a href="video/index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-video-camera fa-fw w3-xxlarge"></i>
+    <p>Upload videos </p>
+  </a>
+  <a href="register.php" class="w3-bar-item w3-button w3-padding-large  w3-black w3-hover-shadow">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>Customer Details</p>
+  </a>
+  <a href="reqorder.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-book fa-fw w3-xxlarge"></i>
+    <p>Orders</p>
+  </a>
+  <a href="report.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-folder fa-fw w3-xxlarge"></i>
+    <p>View Reports</p>
+  </a>
+  <a href="delivery.class.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-motorcycle w3-xxlarge"></i>
+    <p>Delivery</p>
+  </a>
+  <a href="stock.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-sticky-note w3-xxlarge"></i>
+    <p>Stock</p>
+  </a>
+  <a href="feed.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-comment w3-xxlarge"></i>
+    <p>Feedback</p>
+  </a>
+
+
+ <!--  <a href="index1.php?logout=1" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-power-off w3-xxlarge"></i>
+    <p>LOGOUT</p>
+  </a> -->
+</nav>
+<!--adddel-->
+<div id="adddel" class="w3-container person">
+   <div class="w3-main w3-black" style="margin-left:283px;margin-top:5px;">
+
+    <!-- Header -->
+    <!-- <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i> Add/Delete Items</h5>
+    </header> -->
+<br>
+<div class="w3-container" id="menu">
+  <div class="w3-content w3-white w3-round" style="max-width:900px">
+ 
+    <div class="w3-row w3-center w3-card w3-padding">
+     <!--  <a href="javascript:void(0)" onclick="openMenu(event, 'shake');" id="myLink">
+       
+      </a> -->
+    </div>
+
+    <div id="pet" class="w3-container w3-padding-48 w3-card">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+   
+
+
+<!-- Modal -->
+<div class="modal fade" id="petmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add pets</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="admin_insert.php" method="POST" enctype="multipart/form.data">
+      <div class="modal-body">
+
+        <div class="form-group">
+                <label>Pet Name</label>
+                <input type="text" name="tname" class="form-cotrol" placeholder="Enter name" required>
+              </div>
+
+              <div class="form-group">
+                <label>Pet Price</label>
+                <input type="text" name="tprice" class="form-cotrol" placeholder="Enter price" required>
+              </div>
+              <div class="form-group">
+                <label>Pet Description</label>
+                <input type="text" name="tdescp" class="form-cotrol" placeholder="Enter Description" required>
+              </div>
+
+              <div class="form-group">
+                <label>Add Pet/Pet product</label>
+                <br>
+             <!--   <input type="file" name="timage" id="pet_image" class="form-cotrol" required>-->
+             <input type="file"  onchange="onFileSelected(event)" hidden id="sham" name="timage">
+   <label for="sham"> <img id="myimage" height="200" width="200px" alt=" &nbsp;Click here to select image &nbsp;">
+              </div>
+              <div class="form-group">
+                <label>Quantity</label>
+                <input type="text" name="tquantity" class="form-cotrol" placeholder="Enter no of pets" required>
+              </div>
+
+              <div class="form-group">
+                <label>Enter type</label>
+         <br>
+
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="dog" id="dog" name="tpet" required>Dogs
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="cat" id="cat" name="tpet" required>Cats
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="rabbit" id="rabbit" name="tpet" required>Rabbits
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="fish" id="fish" name="tpet" required>Fish
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="bird" id="bird" name="tpet" required>Birds
+         <br>
+              </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" name="Submit" class="btn btn-primary">Save</button>
+      </div>
+  </form>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+  
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="a.0 font-weight-bold text-primary "> Add pets
+  
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#petmodal">
+  add data
+</button>
+      </h6>
+    </div>
+      
+  <!--   <div class="w3-container">
+       <div class="w3-container">
+       <h5>Add items</h5>
+       <form action="admin_insert.php" method="POST">
+         <input type="file"  onchange="onFileSelected(event)" hidden id="sham" name="timage">
+   <label for="sham"> <img id="myimage" height="200" width="200px" alt=" &nbsp;Click here to select image &nbsp;"><label>
+         <input class="w3-white w3-hover-grey w3-round" type="file" name="timage" >
+         <br>
+         <br> 
+         <label>Enter item name</label>
+         <br>
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="text" placeholder="Enter item name" name="tname" required>
+         <br>
+         <label>Enter item price</label>
+         <br>
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="text" placeholder="Enter item price" name="tprice" required>
+         <br>
+         <label>Enter type</label>
+         <br>
+
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="dog" id="dog" placeholder="Enter item price" name="tshake" required>Dogs
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="cat" id="cat" placeholder="Enter item price" name="tshake" required>Cats
+         <input class="w3-border w3-margin-bottom w3-round w3-padding" size="30" type="radio" value="rabbit" id="rabbit" placeholder="Enter item price" name="tshake" required>Rabbits
+         <br>
+
+         <input type="submit" name="Submit" class="w3-button w3-black w3-round w3-small w3-hover-grey"><i class=""></i></button>
+       </form>
+    </div> -->
+    <br>
+
+<table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+    <tr>
+      <th>ID</th>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Show</th>
+      <th>Hide</th>
+      <th>Edit</th>
+      <!-- <th>Remove</th> -->
+    </tr>
+
+    <?PHP
+
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $query = " SELECT  * FROM `workshops` ";
+  $queryfire = mysqli_query($con, $query);
+    while($product = mysqli_fetch_array($queryfire)){
+      ?>
+      <tr>
+      <td><?php echo $product['id'];  ?></td>
+      <td><?php echo $product['type'];  ?></td>
+      <td><?php echo $product['title'];  ?></td>
+      <td><?php echo $product['price'];  ?></td>
+      <td><?php echo $product['stock'];?></td>
+       <?php
+                $disButton="";
+                if($product['status']==1)
+                {
+                  $disButton = "disabled";
+                }
+                ?>
+      <td><a href="show.php?id=<?php echo $product['id'];  ?>"><button <?php echo $disButton; ?> class="w3-button w3-green w3-round w3-small w3-hover-white"><i class="fa fa-eye"></i>&nbsp;Show</button></a></td>
+       <?php
+                $disButton1="";
+                if($product['status']==0)
+                {
+                  $disButton1 = "disabled";
+                }
+                ?>
+      <td><a href="hide.php?id=<?php echo $product['id'];  ?>"><button <?php echo $disButton1; ?> class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-eye-slash"></i>&nbsp;Hide</button></a></td>
+      <td><a href="edit.php?id=<?php echo $product['id'];  ?>"><button class="w3-button w3-blue w3-round w3-small w3-hover-white " name="edit_btn" id="edit_id"><i class="fa fa-cogs"></i>&nbsp;Edit</button></a></td>
+      <!-- <td><a href="removeitem.php?id=<?php echo $product['id'];  ?>"><button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-trash"></i>&nbsp;Remove</button></a></td> -->
+    <?php   
+    }
+  ?>
+  </table>
+      
+    
+
+
+     <br>
+
+
+
+<!--
+      <h5>View/Delete items</h5>
+      <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+        <tr>
+          <td> <img src="http://localhost/pro/Espresso.jpg" width="200"></td>
+          <td><font size=4>Expresso</font></td>
+          <td><font size=4>70</font></td>
+      <br>
+          <th><button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-arrow-right"></i>&nbsp;Remove</button></th>
+        </tr>
+        
+        <tr>
+          <td> <img src="http://localhost/pro/coffee.jpg" width="200"></td>
+          <td><font size=4>Coffee</font></td>
+          <td><font size=4>80</font></td>
+       
+          <td> <button class="w3-button w3-black w3-round w3-small w3-hover-white"><i class="fa fa-arrow-right"></i>&nbsp;Remove</button></td>
+        </tr>
+      </table><br>
+  
+    </div>
+  -->
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-light-grey">
+      <h4>FOOTER</h4>
+      <p>Powered by <a href="test.php" target="_blank">The BB Pet Zone</a></p>
+    </footer>
+
+<!--adddel end-->
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+
+function openMenu(evt, menuName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menu");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+  }
+  document.getElementById(menuName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+}
+document.getElementById("myLink").click();
+
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+var openInbox = document.getElementById("myBtn");
+openInbox.click();
+
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+function myFunc(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show"; 
+    x.previousElementSibling.className += " w3-red";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+    x.previousElementSibling.className = 
+    x.previousElementSibling.className.replace(" w3-red", "");
+  }
+}
+
+openMail("Borge")
+function openMail(personName) {
+  var i;
+  var x = document.getElementsByClassName("person");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  /*
+  x = document.getElementsByClassName("test");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" w3-light-grey", "");
+  }*/
+  document.getElementById(personName).style.display = "block";
+ /* evt.currentTarget.firstElementChild.className += " w3-dark-grey";*/ 
+}
+</script>
+
+<script>
+var openTab = document.getElementById("firstTab");
+openTab.click();
+</script>
+
+<script>
+function onFileSelected(event) {
+  var selectedFile = event.target.files[0];
+  var reader = new FileReader();
+
+  var imgtag = document.getElementById("myimage");
+  imgtag.title = selectedFile.name;
+
+  reader.onload = function(event) {
+    imgtag.src = event.target.result;
+  };
+
+  reader.readAsDataURL(selectedFile);
+}
+</script>
+
+</body>
+</html>

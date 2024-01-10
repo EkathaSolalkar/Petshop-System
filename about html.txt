@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>about us page</title>
+	
+	
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Quicksand:300');
+		body
+		{
+			margin: 0;
+			padding: 0;
+
+			background: url(images.png);
+			background-size: cover;
+			height: 100vh;
+			
+			font-family: 'Quicksand',Lucida Handwriting;
+		}
+		
+		.neon
+		{
+			position: absolute;
+			top: 10%;
+			left: 35%;
+			transform: translate(-20%,-20%);
+			margin: 0;
+			padding: 0px;
+			font-size: 4em;
+			color: navy blue;
+			text-shadow: 0 0 20px blue ;
+
+		}
+		.txt
+		{
+			position: absolute;
+			top: 30%;
+			left: 2%;
+			background-color: blue;
+		}
+</style>
+</head>
+<body>
+	
+	<h1 class="neon"> Welcome To Pet Zone</h1>
+	<h3 class="txt"> Hai hello</h3>
+
+
+</body>
+</html>
