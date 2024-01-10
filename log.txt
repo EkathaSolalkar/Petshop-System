@@ -1,0 +1,144 @@
+<?php require_once 'autho.php'; ?>
+<?php
+  $error = NULL;
+  if(isset($_POST['login-btn1111'])){
+    //Connect to database
+    $mysqli = NEW MySQLi('localhost','root','','ecommerce');
+    //Get form data
+    $u = $mysqli->real_escape_string($_POST['username']);
+    $e = $u;
+    $p = $mysqli->real_escape_string($_POST['password']);
+    $p = md5($p);
+
+    //query the databse
+    $resultSet = $mysqli->query("SELECT * FROM admin_tb WHERE email = '$e' OR username = '$u' AND password = '$p' LIMIT 1");
+
+    if($resultSet->num_rows !=0){
+      //Process Login
+      $row = $resultSet->fetch_assoc();
+      $verified = $row['verified'];
+      $email =$row['email'];
+      $date = $row['createdate'];
+      $date = strtotime($date);
+      $date = date('M d Y',$date);
+
+      if($verified == 1){
+        //Continue processing
+    $_SESSION['id'] = $row['id'];
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['verified'] = $row['verified'];
+    $_SESSION['fname'] = $row['fname'];
+    header('location: ds.php');
+    exit();
+      }
+      else{
+        $error = '<font color="red">This account not yet been verified. An email was sent to ' . $email . 'on ' . $date. '</font>';
+      }
+    }
+    
+    else{
+      //Invalid credentials
+      $error = '<font color="red"><center>Wrong credential</center></font>';
+    }
+  }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		
+<!--bootstrap cdn-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<style type="text/css">
+	/* import google font */
+	@import url('https://fonts.googleapis.com/css?famiy=Lora');
+	.form-div
+	{
+		margin: 50px auto 50px;
+		padding: 25px 15px 10px 15px;
+		border: 1px solid #80ced7;
+		border-radius: 5px;
+		font-size: 0.5cm;
+		font-family: 'Lora',serif;
+
+	}
+	.form p
+	{
+		font-size: .89cm;
+	}
+	.form-div.login
+	{
+		margin-top: 100px;
+	}
+body
+{
+background-image: url('wallpaper.jpg');
+background-repeat: no-repeat;
+background-size: 100%;
+background-position: center;
+}
+.log
+{
+	width: 100px;
+    height: 95px;
+    border-radius: 50%;
+    position: absolute;
+    top: -15%;
+    left: 37%;
+}
+
+
+
+</style>
+
+
+<title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="des.css">
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 offset-md-4 form-div login">
+				<img src="l.png" class="log">
+				<form action="log.php" method="post">
+					<h3 class="text-center" style="font-size: 30px; color: white;"><b>Login</h3>
+
+					<?php if(count($errors)> 0): ?>
+
+					<div class="alert alert-danger">
+						<?php foreach($errors as $error): ?>
+						 <li><?php echo $error; ?></li>
+						<?php endforeach; ?> 
+					</div>
+				<?php endif; ?>
+ 
+					<div class="form-group" style="font-size: 25px;color: white;">
+						<label for="username">Username or Email</label>
+						<input type="text" name="username" value="<?php echo $username; ?>" class="form-control form-control-lg" placeholder="Enter username" required>
+					</div>
+                    
+					<div class="form-group">
+						<label for="password" style="font-size: 25px; color: white;">Password</label>
+						<input type="password" name="password" class="form-control form-control-lg" placeholder="Enter username" required><?php echo $error;?>
+					</div>
+					<!-- <p class="text-center" style="color: white;">Forgot password? <a href="">Forgot</a> -->
+
+					
+					<div class="form-group">
+						<button type="submit" name="login-btn1111" class="btn btn-primary btn-block btn-lg">Login</button>
+					</div>
+					<p class="text-center" style="color: white;">Not yet a member? <a href="signup.php">Sign up</a></p>
+
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

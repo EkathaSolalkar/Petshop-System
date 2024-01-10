@@ -1,0 +1,38 @@
+<?php
+
+session_start();
+header('location:login.php');
+$con=mysqli_connect('localhost','root');
+if($con)
+{
+	echo "connected successfully";
+}
+	else
+	{
+		echo "no connection";
+	}
+mysqli_select_db($con,'regs');
+
+$name=$_POST['usr'];
+$pass=$_POST['pwd'];
+$mail=$_POST['em'];
+$ph=$_POST['phn'];
+
+$q="select *from regstb where username='$name' && password='$pass' && email='$mail' && phone='$ph'";
+$result=mysqli_query($con,$q);
+
+$num=mysqli_num_rows($result);
+
+if($num==1)
+{
+	echo "duplicate data";
+
+}
+else
+{
+	$qy="insert into regstb(username,password,email,phone) values ('$name','$pass','$mail','$ph')";
+	mysqli_query($con,$qy);
+}
+
+
+?>

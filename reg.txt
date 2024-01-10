@@ -1,0 +1,195 @@
+<?php
+$error=NULL;
+//include_once("config.php");
+if(isset($_POST['submit']))
+{
+	//get form data
+	$u=$_POST['u'];
+	$p1=$_POST['p1'];
+	$p2=$_POST['p2'];
+	$e=$_POST['e'];
+
+	if(strlen($u) < 5)
+	{
+		$error = "<p><b>Your Username must be atleast 5 characters</b></p>";
+	}
+		elseif ($p2 != $p1) {
+			$error .="<p><b>  Password doesn't match</b></p>";
+			
+		}
+		else
+		{
+			//form is valid
+
+			//connect to the databse
+
+			$mysqli=NEW MySQLi('localhost','root','','regs');
+			//sanitize form data
+			$u=$mysqli->real_escape_string($u);
+			$p1=$mysqli->real_escape_string($p1);
+			$p2=$mysqli->real_escape_string($p2);
+			$e=$mysqli->real_escape_string($e);
+
+			//generate vkey
+			$vkey=md5(time().$u);
+	
+
+
+			//inserting
+			$p1=md5($p1);
+			$insert=$mysqli->query("INSERT INTO regstb (username,password,email,vkey) VALUES ('$u','$p1','$e','$vkey')");
+
+			if($insert)
+			{
+				echo "success";
+			//send email
+				//$to=$e;
+//$msg= "Thanks for new Registration.";   
+//$subject="Email verification ";
+//$headers .= "MIME-Version: 1.0"."\r\n";
+//$headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
+//$headers .= 'From:CodeWithSuneja | Technical Suneja <tutorialspoint2016@gmail.com>'."\r\n";
+				$to = $e;
+				$subject="Email verification";
+				$message="<a href='http://localhost/registration/verify.php?vkey=$vkey'>Register Account</a>";
+				$headers .="From: sushmithadivyadas@gmail.com"." \r\n";
+				$headers .="MIME-Version: 1.0" . "\r\n";
+				$headers .="Content-type:text/html;charset=UTF-8" . "\r\n";
+
+				mail($to, $subject, $message,$headers);
+				header('location:thankyou.php');
+
+				
+			}
+			else
+			{
+				echo $mysqli->error;
+			}
+
+		}
+	
+
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration form</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<?php
+	include('toggle.php');
+	?>
+	<style type="text/css">
+
+		body
+		{
+			margin: 0;
+			padding: 0;
+			background: url(bb.jpg);
+			font-family: Bradley Hand ITC;
+			background-repeat: no-repeat;
+			background-size: cover;
+			color: white;
+
+
+		}
+		.reginbox
+		{
+			width: 400px;
+			height: 580px;
+			background:#000;
+			opacity: 0.5;
+			color: #fff;
+			top: 50%;
+			left: 50%;
+			position: absolute;
+			transform: translate(-50%,-45%);
+			box-sizing: border-box;
+			padding:12px;
+		}
+		.reg
+		{
+			width: 125px;
+			height: 85px;
+			border-radius: 20%;
+			position: absolute;
+			top:-10%;
+			left: 30%;
+
+		}
+		.reginbox p
+		{
+			margin: 0;
+			padding: 0;
+			font-size: 18px;
+			font-family: Lucida Handwriting;
+			font-weight: bold;
+		}
+		.reginbox input
+		{
+			width: 100%;
+			margin-bottom: 20px;
+		}
+		.reginbox input[type="Password"],input[type="text"],input[type="Email"]
+		{
+			border:none;
+			border-bottom: 1px solid #fff;
+			background:transparent;
+			outline: none;
+			height: 40px;
+			color: #fff;
+			font-size: 16px;
+		}
+		.reginbox button[type="submit"]
+		{
+			border:none;
+			outline: none;
+			height: 40px;
+			width: 100px;
+
+			
+			color: black;
+			font-size: 18px;
+			border-radius: 9px;
+		}
+		.reginbox button[type="submit"]:hover
+		{
+			cursor: pointer;
+			background:green;
+			color: black;
+		}
+		body
+		{	background: url(gh.png);
+			background-size: cover;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+<div class="reginbox">
+	<img src="rr.jpg" class="reg">
+	
+	<form method="POST" action="reg.php">
+		<br><br>
+		<p>Username :</p>
+		<input type="text" name="u" required placeholder="Enter the Username">
+		<p>Password :</p>
+		<input type="Password" name="p1" required  placeholder="Enter the password">
+		<p>Confirm Password :</p>
+		<input type="Password" name="p2" required  placeholder="Enter the password">
+		<p>Email :</p>
+		<input type="Email" name="e"  required placeholder="Enter the password">
+		<button type="submit" name="submit" class="btn btn-primary">Register</button>
+		
+		<p><br>Already an User?then <a href="login.php">Login Here</a></p>
+	</form>
+</div>
+<?php
+echo $error;
+?>
+
+</body>
+</html>

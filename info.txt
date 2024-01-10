@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>des</title>
+
+	<!--font awesome-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+	
+     <!--bootstrap cdn-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	
+</head>
+<body>
+	<?php
+	session_start();
+		include('header.php');
+		include('toggle.php');
+		include('create.php');
+		//include('component.php');
+
+		$database = new create("Productdb","producttb");
+		$con=mysqli_connect("localhost","root","","productdb");
+
+
+		if(isset($_POST['ig']))
+{
+	print_r($_POST['product_id']);
+}
+	
+ function getData()
+{
+	$sql="SELECT *FROM $this->tablename";
+	$result=mysqli_query($this->con,$sql);
+
+	if(mysqli_num_rows($result)>0)
+	{
+		return $result;
+	}
+}
+
+?>
+
+<?php
+function component($productname,$productprice,$productimg,$strokeprice,$productid)
+{
+	$element="
+	<div class=\"col-md-3 col-sm-6 my-3 my-md-0\">
+	<form action=\"dog1.php\" method=\"post\">
+		<div class=\"card-shadow\">
+			<div>
+				<a href=info.php >
+		<img src= \"$productimg\" alt=\"image1\" name=\"ig\" class=\"img-fluid card-img-top\" ></a>
+			</div>
+			<div class=\"card-body\">
+				<h5 class=\"card-title\">$productname</h5>
+				<h6>
+					<i class=\"fas fa-star\"></i>
+					<i class=\"fas fa-star\"></i>
+					<i class=\"fas fa-star\"></i>
+					<i class=\"fas fa-star\"></i>
+					<i class=\"far fa-star\"></i>
+				</h6>
+			<h5>
+				<small><s>&#8377;$strokeprice</s></small>
+				<span class=\"price\" >&#8377;$productprice</span>
+			</h5>
+			<button type=\"submit\" class=\"btn btn-warning my-3\" name=\"add\">Add to Cart<i class=\"fa fa-shopping-cart\"></i></button>
+			<input type='hidden' name='product_id' value='$productid'>
+
+
+		</div>
+	</div>
+	</form>
+</div>
+";
+echo $element;
+}
+
+$result=$database->getData();
+while ($row=mysqli_fetch_assoc($result))
+{ 
+	component($row['product_name'],$row['product_price'],$row['product_image'],$row['stroke_price'],$row['id']);
+
+	}
+
+
+function cartElement($productimg,$productname,$productprice)
+{
+	$element="<form action=\"cart.php\" method=\"get\" class=\"card-items\">
+						<div class=\"border rounded\">
+							<div class=\"row bg-white\">
+								<div class=\"col-md-3 pl-0\">									
+								<img src=$productimg alt=\"Image1\" class=\"img-fluid\">
+								</div>
+								<div class=\"col-md-6\">
+									<h5 class=\"pt-2\">$productname</h5>
+									<small class=\"text-secondary\">Seller:dailytuitio</small>
+									<h5 class=\"pt-2\">$productprice</h5>
+									<button type=\"submit\" class=\"btn btn-warning\">Save for Later</button>
+									<button type=\"submit\" class=\"btn btn-danger mx-2\" name=\"remove\">Remove</button>
+									
+								</div>
+								<div class=\"col-md-3 py-5\">
+									<div>
+									<button type=\"button\" class=\"btn bg-light border rounded-circle\"><i class=\"fas fa-minus\"></i></button>
+									<input type=\"text\" value=\"1\" class=\"form-control w-25 d-inline\">
+									<button type=\"button\" class=\"btn bg-light border rounded-circle\"><i class=\"fas fa-plus\"></i></button>
+
+								</div>
+				</div>
+			</div>
+		</form>
+		";
+	echo $element;
+}
+?>
+</body>
+</html>
+

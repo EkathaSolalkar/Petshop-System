@@ -1,0 +1,24 @@
+<div class="menu-bar">
+	<ul>
+		<li><a href="test.html"><i class="fa fa-home"></i></a></li>
+		<li><a href="about.php"><i class="fa fa-user"></i> ABOUT US</a></li>
+		<li></i>CATEGORY</a>
+		<div class="sub-menu-1">
+			<ul>
+				<li><a href="dog1.php"> Dogs</a></li>
+				<li><a href="cats.php"> Cats</a></li>
+				<li><a href="birds.php"> Birds</a></li>
+				<li><a href="fish.php"> Fishes</a></li>
+				<li><a href="rabbit.php"> Rabbits</a></li>
+			</ul>
+		</div>
+		</li>
+		<li><a href="contact.php"><i class="fa fa-phone-square"></i> CONTACT</a></li>
+		<li><a href="login.php"><i class="fa fa-sign-in"></i> LOGIN</a></li>
+		<li><a href="register.php"><i class="fa fa-registered"></i> REGISTER</a></li>
+		<li><a href="#">ACCESSORIES</a></li>
+		<li><a href="cart.php"><i class="fa fa-shopping-cart"> CART</i></a></li>
+		<li><a href="search.php"><i class="fa fa-search"></i></a></li>
+
+	</ul>
+</div>

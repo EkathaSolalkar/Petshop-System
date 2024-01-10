@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>online pet shopping</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script type="text/javascript">
+		function togglemenu()
+		{
+			document.getElementById('sidebar').classList.toggle('active');
+		}
+	</script>
+</head>
+<body>
+<div id="sidebar" onclick="togglemenu()">
+	<div class="toggle-btn">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<ul>
+		<li><a href=""><i class="fa fa-home"></i> HOME</a></li>
+		<li><a href=about.php><i class="fa fa-user"></i> ABOUT-US</a></li>
+		<li><a href=""><i class="fa fa-paw"></i> PETS<i class="fa fa-angle-down"></i></a>
+			<ul>
+				<li><a href=dog2.php>DOGS</a></li>
+				<li><a href="">CATS</a></li>
+				<li><a href="">BIRDS</a></li>
+				<li><a href="">FISHES</a></li>
+				<li><a href="">RABBITS</a></li>
+			</ul>
+		</li>
+		<li><a href=""><i class="fa fa-phone-square"></i> CONTACT US</a></li>
+		<li><a href=""><i class="fa fa-product-hunt"></i> PRODUCT-HUNT</a></li>
+		<li><a href=reg.php><i class="fa fa-sign-in"></i> SIGN-UP</a></li>
+		<li><a href=""><i class="fa fa-shopping-cart"></i> CART</a></li>
+</ul>
+</div>
+</body>
+</html>

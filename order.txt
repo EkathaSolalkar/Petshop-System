@@ -1,0 +1,178 @@
+<?php
+include('security.php');
+//include('includes/hdr.php');
+//include('includes/nav.php');
+
+
+?>
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="des.css">
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <body style="background-color: black;">
+    <?php
+    $cid = "";
+    $pid = "";
+    $total = "";
+     $link = mysqli_connect("localhost", "root", "", "ecommerce"); 
+     $sql="SELECT * FROM ordertb where status='ORDERED'";
+
+     $queryfire = mysqli_query($link, $sql);
+    while($product = mysqli_fetch_array($queryfire)){
+      $cid = $product['cid'];
+      $transid = $product['transid'];
+       $date = $product['orderedOn'];
+      ?>
+          
+
+           <?php 
+            $sql1 ="SELECT * FROM customer where id='$cid'";
+            $queryfire1 = mysqli_query($link, $sql1);
+            while($product1 = mysqli_fetch_array($queryfire1)){
+           ?>
+<?php 
+            $sql3 ="SELECT * FROM order_item where transid='$transid'";
+            $queryfire3 = mysqli_query($link, $sql3);
+            while($product3 = mysqli_fetch_array($queryfire3))
+            {
+            $pid = $product3['pid'];
+            // $total = $product3['total'];
+           ?> 
+           <?php 
+                $sql2 ="SELECT * FROM workshops where id= '$pid'";
+              
+                $queryfire2 = mysqli_query($link, $sql2);
+                while($product2 = mysqli_fetch_array($queryfire2)){
+              ?>
+<div class="card-body">
+  <table border=1 cellpadding=1 cellspacing=1 class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+<!--    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+ -->      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer Id</th>
+          <th>Product Id</th>
+          <th>Name</th>
+          <th>mobile</th>
+          <th>Address</th>
+          <th>Pincode</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Total Amount</th>
+          <th>Order Date</th>
+
+
+            </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+         <td> <?php echo $product['transid']; ?></td>
+         <td><?php echo $product1['id']; ?></td>
+          <td><?php echo $product2['id']; ?></td>
+          <td><?php echo $product1['dname']; ?></td>
+          <td><?php echo $product1['dpno']; ?></td>
+          <td><?php echo $product1['daddress']; ?></td>
+          <td><?php echo $product1['dpin']; ?></td>
+          <td><?php echo $product2['title']; ?></td>
+          <td><?php echo $product3['qty']; ?></td>
+          <td>&#8377;<?php echo $product2['price']; ?></td>
+          <td><?php echo $date; ?></td>
+          <?php
+        }
+        ?>
+        <?php
+      }
+      ?>
+          <td>
+            <form action="" method="post">
+              <input type="hidden" name="ready_id" value="<?php echo $row['id']; ?>">
+            <button type="submit" name="ready_btn" class="btn btn-success">Ready</button>
+          </form>
+          </td>
+          <td>
+          <form action="" method="post">
+              <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+            <button type="submit" name="delete_btn" class="btn btn-danger">DELETE</button>
+          </form>
+          </td>
+        </tr>
+          <?php
+      }
+    }
+    
+    ?>
+  </body>
+  <?php
+
+if(isset($_POST['delete_btn']))
+{
+  $id=$_POST['delete_id'];
+  $query="delete from ordertb where id='$id' ";
+  $query_run=mysqli_query($con,$query);
+
+  if($query_run)
+  {
+    $_SESSION['success']="your data is deleted";
+    header('Location:order.php');
+  
+
+  }
+  else
+  {
+    $_SESSION['status']="your data is not deleted";
+    header('Location:order.php');
+  
+
+  }
+
+}?>
+<!--   <?PHP
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+    $query = " SELECT  * FROM `ordertb`";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?> 
+      <input type="hidden" name="cid" value="<?php echo $product['id'];?>">
+      <?php
+      }
+      ?> 
+ <?php
+session_start();
+$con=mysqli_connect("localhost","root","","ecommerce");
+
+if(isset($_POST['Ready_btn']))
+{
+    $cid=$_POST['cid'];
+    $pid=$_POST['pid'];
+    $customer_name=$_POST['billing_name'];
+    $address=$_POST['billing_address'];
+   
+    $pincode=$_POST['billing_zip'];
+    $item=$_POST['item'];
+    $total_amount=$_POST['price'];
+    //$amt=$_POST['ss'];
+
+
+$query="insert into  (cid,pid,customer_name,address,pincode,item,total_amount) values ('$cid','$pid','$customer_name','$address','$pincode','$item','$total_amount')";
+            $query_run=mysqli_query($con,$query);
+
+            if($query_run)
+    {
+        echo "saved";
+        //$_SESSION['success']="customer profile added";
+        header('Location:test.php');
+
+    }
+    else
+    {
+        echo "error......";
+        //$_SESSION['status']="customer profile not added";
+        header('Location:test.php');
+    }
+    }
+?> -->

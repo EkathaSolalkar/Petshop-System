@@ -1,0 +1,145 @@
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+<link rel="stylesheet" href="des.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<?PHP
+session_start();
+  $con = mysqli_connect('localhost','root');
+  mysqli_select_db($con,'ecommerce');
+  $ap = $_SESSION['username'];
+  $query = " SELECT *FROM `admintb` where username='$ap'";
+  $queryfire = mysqli_query($con, $query);
+   while($product = mysqli_fetch_array($queryfire)){
+      ?>
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center w3-black" style="z-index:3;width:300px;">
+
+<a href="ds.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-user fa-fw w3-xxlarge"></i>
+        <p><b>Welcome &nbsp;&nbsp;<?php echo $product['name'];?></b></p></a><?php } ?>
+
+<a href="adminprofile.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users fa-fw w3-xxlarge"></i>
+    <p>Add Admin</p>
+  </a>
+  <a href="add.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-plus fa-fw w3-xxlarge"></i>
+    <p>Add Items</p>
+  </a>
+  <a href="video/index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-video-camera fa-fw w3-xxlarge"></i>
+    <p>Upload videos </p>
+  </a>
+  <a href="register.php" class="w3-bar-item w3-button w3-padding-large  w3-black w3-hover-shadow">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>Customer Details</p>
+  </a>
+  <a href="reqorder.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-book fa-fw w3-xxlarge"></i>
+    <p>Orders</p>
+  </a>
+  <a href="report.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-folder fa-fw w3-xxlarge"></i>
+    <p>View Reports</p>
+  </a>
+  <a href="delivery.class.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-motorcycle w3-xxlarge"></i>
+    <p>Delivery</p>
+  </a>
+  <a href="stock.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-sticky-note w3-xxlarge"></i>
+    <p>Stock</p>
+  </a>
+  <a href="feed.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-shadow">
+    <i class="fa fa-comment w3-xxlarge"></i>
+    <p>Feedback</p>
+  </a>
+
+  
+</nav>
+ <div id="adddel" class="w3-container person">
+   <div class="w3-main" style="margin-left:283px;margin-top:5px;">
+ <?php
+      $cid = "";
+ $link = mysqli_connect("localhost", "root", "", "ecommerce"); 
+ if(isset($_REQUEST['searchsubmit']))
+ {
+  $startdate=$_REQUEST['startdate'];
+  $enddate=$_REQUEST['enddate'];
+  $sql="select *from ordertb where orderedOn BETWEEN '$startdate' AND '$enddate'";
+  $queryfire = mysqli_query($link, $sql);
+  if($queryfire->num_rows>0)
+  {
+
+    ?>
+    <div style="padding-left: 50px;">
+      <?php
+    echo '<table class="table">';
+    echo '<thead>';
+    echo '<tr>';
+    echo '<th scope="col">Oid</th>';
+    echo '<th scope="col">Transid</th>';
+    echo '<th scope="col">Cid</th>';
+    echo '<th scope="col">Cname</th>';
+    echo '<th scope="col">Orderedon</th>';
+    echo '<th scope="col">Dname</th>';
+    echo '<th scope="col">Address</th>';
+        echo '<th scope="col">Pincode</th>';
+            echo '<th scope="col">Phone no</th>';
+
+
+        echo '<th scope="col">Status</th>';
+
+    echo '<th scope="col">Action</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+    while($row=$queryfire->fetch_assoc())
+    {
+       $cid = $row['cid'];
+    $sql1 ="SELECT * FROM customer where id='$cid'";
+            $queryfire1 = mysqli_query($link, $sql1);
+            while($product = mysqli_fetch_array($queryfire1)){
+           
+      echo '<tr>';
+      echo '<td>'.$row['oid'].' </td>';
+      echo '<td> '.$row['transid'].'</td>';
+      echo '<td>'.$row['cid'].' </td>';
+            echo '<td>'.$product['name'].' </td>';
+
+      echo '<td> '.$row['orderedOn'].'</td>';
+      echo '<td>'.$row['dname'].' </td>';
+      echo '<td> '.$row['daddress'].'</td>';
+            echo '<td> '.$row['dpincode'].'</td>';
+      echo '<td> '.$row['dphone'].'</td>';
+
+      ?>
+            <td> <label class="w3-tag w3-large w3-<?php echo $disButton_status ?>w3-round w3-center"><?php echo $row['status'];?></label></td>
+
+       <td><a href="view1.php?id=<?php echo $row['transid'];  ?>"> <button name="view_order"class="w3-button w3-small w3-green w3-hover-grey w3-round">View details</button></a></td>
+
+      <?php 
+      echo '</tr>';
+}
+
+    }
+    echo '</tbody>';
+    echo '</table>';
+    ?>
+  </div>
+  <?php
+
+  
+
+
+  }else
+  {
+    echo "<div class='alert alert-warning col-sm-6 ml-5 mt-2' role='alert'>No records found !</div>";
+  }
+ }
+
+      ?>
+    </div>
