@@ -1,0 +1,238 @@
+<?php
+session_start();
+require 'config.php';
+//require_once 'emailcontroller.php';
+	
+$errors = array();
+$username = "";
+$email = "";
+$name = "";
+
+
+//if user clicks on the sign up button
+if (isset($_POST['signup-btn']))
+{
+	$username = $_POST['username'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$passwordconf = $_POST['passwordconf'];
+	$name = $_POST['name'];
+	$address=$_POST['address'];
+	$mobile=$_POST['mobile'];
+//	$createdon=$_POST['createdon'];
+
+	//validation
+	if(empty($name))
+	{
+		$errors['name']= "Name required";
+
+	}
+	if(empty($username))
+	{
+		$errors['username']= "Username required";
+
+	}
+	if (!filter_var($email,FILTER_VALIDATE_EMAIL)) 
+	{
+		$errors['email']= "Email Address is invalid";
+
+	}
+	if(empty($email))
+	{
+		$errors['email']= "Email required";
+
+	}
+	if(empty($password))
+	{
+		$errors['password']= "Password required";
+
+	}
+	if(empty($mobile))
+	{
+		$errors['mobile']= "Mobile number required";
+
+	}
+	if($password !== $passwordconf)
+	{
+		$errors['password']= "the two password do not match";
+	}
+	if(empty($username))
+	{
+		$errors['address']= "Address required";
+
+	}
+
+	$emailQuery="SELECT * FROM customer WHERE email=? LIMIT 1";
+	$stmt= $conn->prepare($emailQuery);
+	$stmt->bind_param('s',$email);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$userCount= $result->num_rows;
+	$stmt->close();
+
+	if($userCount > 0)
+	{
+		$errors['email']="Email already exists";
+
+	}
+if($userCount > 0)
+	{
+		$errors['username']="Username already exists";
+
+	}
+
+	if(count($errors)=== 0)
+	{
+		//Form is Valid
+
+    //Connect to the Database
+    $mysqli = NEW MySQLi('localhost','root','','ecommerce');
+
+    //Generate key
+    $vkey = md5(time().$username);
+    // echo $vkey;
+
+    //Insert account into the database
+    // $password= password_hash($password, PASSWORD_DEFAULT);
+    $password = md5($password);
+    $insert = $mysqli->query("INSERT INTO customer(name,email,mobile,address,username,password,verified,token) VALUES('$name','$email','$mobile','$address','$username','$password','$verified','$vkey')");
+    if($insert){
+      //send Email
+      $to = $email;
+      $subject = "Email Verification";
+      $message = '<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <meta charset="UTF-8">
+      <title>Test mail</title>
+      <style>
+        .wrapper {
+          padding: 20px;
+          color: #000000;
+          font-size: 1.0em;
+        }
+        a {
+          background: #000000;
+          text-decoration: none;
+          padding: 8px 15px;
+          border-radius: 5px;
+          color: #FFFFFF;
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="wrapper">
+      <lable>You have successfully registered.</lable>
+        <lable>Click on below button to verify</lable>
+        <br>
+        <br>
+        <a href="http://localhost/sp/verify.php?token=' . $vkey . '"><font color="white">Verify Now</font></a>
+        <br>
+        <br>
+        <lable>From <font color="grey">The Bark & Bite Pet shop </font></a></lable>
+      </div>
+    </body>
+    </html>';
+
+      $headers = "From: barknbite10@gmail.com \r\n";
+      $headers .= "MIME Version:1.0" . "\r\n";
+      $headers .= "Content-Type:text/html;charset=UTF-8" . "\r\n";
+
+      mail($to,$subject,$message,$headers);
+
+      header('location:thankyou.php');
+    }else{
+      echo $mysqli->error;
+    }
+	}
+}
+//if user clicks on the login button
+// if (isset($_POST['login-btn']))
+// {
+// 	$username = $_POST['username'];
+	
+// 	$password = $_POST['password'];
+// 	//$userType=$_POST['userType'];
+
+// 	//validation
+// 	if(empty($username))
+// 	{
+// 		$errors['username']= "Username required";
+
+// 	}
+	
+// 	if(empty($password))
+// 	{
+// 		$errors['password']= "Password required";
+
+// 	}
+
+// 	if(count($errors) ===0)
+// 	{
+// 		$sql = "SELECT * FROM customer WHERE email=? OR username=? LIMIT 1";
+// 	$stmt= $conn->prepare($sql);
+// 	$stmt->bind_param('ss', $username, $username);
+// //$stmt->bind_param("sss",$username,$password,$userType);
+// 	$stmt->execute();
+// 	$result = $stmt->get_result();
+// 	$user = $result->fetch_assoc();
+// 	 //session_regenerate_id();
+// 	  //$_SESSION['username']=$user['username'];
+// 	// $_SESSION['role']=$user['user_type'];
+// 	 //session_write_close();
+
+
+// 	if(password_verify($password, $user['password']))
+// 	{
+// 		// login success
+	
+// 		$_SESSION['id'] = $user['id'];
+// 		$_SESSION['username'] = $user['username'];
+// 		$_SESSION['email'] = $user['email'];
+// 		$_SESSION['verified'] = $user['verified'];
+// 		$_SESSION['name'] = $user['name'];
+// 		$_SESSION['mobile']=$user['mobile'];
+// 		$_SESSION['address']=$user['address'];
+// 		//$_SESSION['createdon']=$user['createdon'];
+// 	//	$_SESSION['role']=$user['userType'];
+
+// 		//flash message
+// 		$_SESSION['message'] = "you are now logged in!";
+// 		$_SESSION['alert-class'] = "alert-success";
+// 		/*if($result->num_rows==1 && $_SESSION['role']=="admin")
+// 	 {
+// 	 	header("location:admin1/ds.php");
+// 	 }
+// 	 if($result->num_rows==1 && $_SESSION['role']=="user")
+// 	 {
+// 	 	header("location:test.php");
+// 	 }*/
+// 		header('location: test.php');
+// 		exit();
+
+// 	}
+// 	else 
+// 	{
+// 		$errors['login_fail']= "wrong credentials";
+// 	}
+// }
+// }
+// logout user
+if(isset($_GET['logout']))
+{
+	session_destroy();
+	unset($_SESSION['id']);
+	unset($_SESSION['username']);
+	unset($_SESSION['email']);
+	unset($_SESSION['verified']);
+	unset($_SESSION['name']);
+	unset($_SESSION['mobile']);
+	unset($_SESSION['address']);
+	unset($_SESSION['createdon']);
+	header('location: frstpage.php');
+	exit();
+
+}
+
