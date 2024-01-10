@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>video uploading</title>
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="des.css">
+<body style="background-color: white;">
+	<br><br><br><br><br>
+	<form style="background-color: gray; max-width:800px; margin-left: 350px;" method="post" action="index.php" enctype="multipart/form-data"><br>
+		<!-- <div class="form" style="padding-left: 465px; margin-right: 200px; padding-top: 100px;">
+ -->		<h1><a href="video.php" style="font-family: cursive;font-size: 25px;padding-left: 350px; color: black;">VIDEOS</a></h1>
+		
+		<center><input style= "font-size: 25px;color: white; "type="file" name="file">
+		<input style= "font-size: 25px; "type="submit" name="upload" value="UPLOAD"></center>
+<br><br>
+</form>
+<br><br><br><br><br><br><br>
+<img src="4.jpg"style="padding-left: 50px; height: 300px;"><img src="4.jpg" style="height: 300px;">
+</body>
+</html>
+<?php 
+include ('db.php');
+if(isset($_POST['upload']))
+{
+	$con = mysqli_connect("localhost","root","","ecommerce");
+ 
+ $name =$_FILES['file']['name'];
+  $file_extension= pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
+  $allowed_video_extension = array(
+    "mp4",
+    "wmv",
+    "mkv");
+  if (! in_array($file_extension, $allowed_video_extension)) {
+    echo "Upload valid video. Only mp4, wmv, mkv images are allowed. ";
+  }
+  
+
+	
+	else
+	{
+	$tmp =$_FILES['file']['tmp_name'];
+
+	move_uploaded_file($tmp, "videos/".$name);
+
+	$sql ="INSERT INTO videos (name) VALUES('$name')";
+	$res= mysqli_query($con,$sql);
+	if ($res==1)
+	{
+		echo "<h1>video inserted successfully</h1>";
+
+	}
+
+}}
+
+ ?>

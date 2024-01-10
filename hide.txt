@@ -1,0 +1,8 @@
+<?php
+$con = mysqli_connect('localhost','root');
+mysqli_select_db($con, 'ecommerce');
+$query = "UPDATE workshops SET status='0' WHERE id='$_GET[id]'";
+if(mysqli_query($con,$query));
+header("refresh:0.000001; url=ds.php");
+echo "Item Hidden";
+?>

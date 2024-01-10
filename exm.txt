@@ -1,0 +1,40 @@
+<?php
+
+$link = mysqli_connect("localhost", "root", "", "ecommerce"); 
+
+$sql="SELECT * FROM ordertb WHERE transid='1222126'";
+
+     $queryfire1 = mysqli_query($link, $sql);
+    $product = mysqli_fetch_array($queryfire1);
+      $cid = $product['cid'];
+      //echo($cid);
+     // $transid = $product['transid'];
+     // $date = $product['createdate'];
+     $sql1="SELECT * FROM order_item WHERE transid='1222126'";
+
+     $queryfire = mysqli_query($link, $sql1);
+    $product1 = mysqli_fetch_array($queryfire);
+     
+      $pid=$product1['pid'];
+      $qty=$product1['qty'];
+      //echo ($pid);
+      //echo ($qty);
+            
+              $sql2="SELECT * FROM workshops WHERE id='$pid'";
+               $queryfire2 = mysqli_query($link, $sql2);
+               while($product2 = mysqli_fetch_array($queryfire2)){
+                 $stock=$product2['stock'];
+                $stock=$stock-$qty;
+              echo ($stock);
+               $query2 = "UPDATE workshops SET stock='$stock' WHERE id='$pid'";
+               if(mysqli_query($link,$query2)){
+
+               }
+              else
+               {
+                 echo "Failed";
+               }
+
+}
+  ?>
+
